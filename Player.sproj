@@ -1,0 +1,16 @@
+{
+    "name": "Sunaba Player",
+    "version": "1.0",
+    "type": "executable",
+    "rootUrl": "player://",
+    "assetsdir": "assets",
+    "scriptdir": "src",
+    "apisymbols": true,
+    "sourcemap": true,
+    "entrypoint": "Main",
+    "luabin": "main.lua",
+    "libraries": [],
+    "compilerFlags": [
+        "-D absolute-path"
+    ]
+}

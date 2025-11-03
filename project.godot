@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Sunaba Player"
+run/main_scene="uid://c13akcqmnx0o3"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Sunaba"
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+boot_splash/fullsize=false
+boot_splash/image="uid://b3josp72gt4kt"
+config/icon="uid://dbqgd8qa3isxs"
+config/macos_native_icon="res://Engine/iconmacos.icns"
+config/windows_native_icon="res://Engine/sunaba.ico"
+
+[autoload]
+
+ResourcePathDB="*res://Engine/ResourcePathDB.gd"
+PlayerUtils="*res://Player/PlayerUtils.cs"
+
+[display]
+
+display_server/driver.linuxbsd="wayland"
+
+[dotnet]
+
+project/assembly_name="Sunaba.Player"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true

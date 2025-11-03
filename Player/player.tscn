@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c13akcqmnx0o3"]
+
+[ext_resource type="Script" uid="uid://du7dd5hvkcogk" path="res://Player/player.gd" id="1_l8h54"]
+
+[node name="Player" type="Runtime"]
+script = ExtResource("1_l8h54")
+metadata/_custom_type_script = "uid://83l0ea83y7oj"
