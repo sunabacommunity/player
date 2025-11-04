@@ -8,5 +8,45 @@
 			offsetTop="-10"
 			offsetLeft="-10"
 			offsetRight="10"/>
+		<sunaba.ui.VBoxContainer
+		    name="vbox"
+		    fullRect="true"
+            separation="0">
+            <sunaba.ui.Control
+                name="menuBarControl"
+                customMinimumSize="0, 27">
+                <sunaba.ui.MenuBar
+                    name="menuBar"
+                    fullRect="true"
+                    customMinimumSize="0, 27">
+                    <sunaba.desktop.PopupMenu
+                        name="File">
+                        <menuItem label="Open" icon="player://icons/16/application--arrow.png"/>
+                        <menuItem label="Exit" icon="player://icons/16/door-open-in.png"/>
+                    </sunaba.desktop.PopupMenu>
+                    <sunaba.desktop.PopupMenu
+                        name="View">
+                        <menuItem label="Toggle Fullscreen (F11)" icon="player://icons/16/arrow-out.png"/>
+                        <menuItem label="Toggle Menubar (F2)" icon="player://icons/16/application-blue.png"/>
+                    </sunaba.desktop.PopupMenu>
+                    <sunaba.desktop.PopupMenu
+                        name="Help">
+                        <menuItem label="Sunaba Docs" icon="player://icons/16/book.png"/>
+                        <menuItem label="About" icon="player://icons/16/information-italic.png"/>
+                    </sunaba.desktop.PopupMenu>
+                </sunaba.ui.MenuBar>
+            </sunaba.ui.Control>
+            <sunaba.ui.Control
+                name="gameView"
+                sizeFlagsVertical="3">
+                <sunaba.ui.SubViewportContainer
+                    name="container"
+                    fullRect="true"
+                    stretch="true">
+                    <sunaba.SubViewport
+                        name="subViewport"/>
+                </sunaba.ui.SubViewportContainer>
+            </sunaba.ui.Control>
+        </sunaba.ui.VBoxContainer>
 	</body>
 </suml>
