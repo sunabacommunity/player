@@ -61,9 +61,13 @@ class Main {
         gamepak.build(currentDir + "Player.sproj");
 
         var dotnetRestore = Sys.command("dotnet restore Sunaba.Player.sln");
-
         if (dotnetRestore != 0) {
             Sys.exit(dotnetRestore);
+        }
+
+        var dotnetBuild = Sys.command("dotnet build Sunaba.Player.sln");
+        if (dotnetBuild != 0) {
+            Sys.exit(dotnetBuild);
         }
 
         if (args[0] == "run") {
