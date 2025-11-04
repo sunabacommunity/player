@@ -12,6 +12,7 @@ func _init() -> void:
 	load_app(snb_path)
 
 func _ready() -> void:
+	PlatformService.PlatformName = "Sunaba Player"
 	var window := get_window()
 	var displayScale := DisplayServer.screen_get_scale(window.current_screen)
 	if (OS.get_name() != "Linux"):
