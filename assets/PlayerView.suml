@@ -48,5 +48,8 @@
                 </sunaba.ui.SubViewportContainer>
             </sunaba.ui.Control>
         </sunaba.ui.VBoxContainer>
+        <sunaba.desktop.AcceptDialog
+            name="aboutDialog"
+            title="About"/>
 	</body>
 </suml>
