@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://d2qlqkqsuico2" path="res://Engine/Theme/windowIcons/close20dark.png" id="16_il6h1"]
 [ext_resource type="Texture2D" uid="uid://dafpvty7c2x6q" path="res://Engine/Theme/dark/banner.png" id="18_c2xtr"]
 [ext_resource type="FontFile" uid="uid://wgmjhpg8t35s" path="res://Engine/Theme/fonts/Oxygen-Regular.ttf" id="21_unv6f"]
-[ext_resource type="FontVariation" uid="uid://c48itrme2gfej" path="res://Engine/Theme/fonts/new_font_variation.tres" id="22_c4270"]
+[ext_resource type="SystemFont" uid="uid://dca7seoyu4mff" path="res://Engine/Theme/fonts/sans_serif.tres" id="22_8cu2s"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ufuef"]
 texture = ExtResource("1_ove3i")
@@ -262,7 +262,7 @@ expand_margin_bottom = 2.0
 region_rect = Rect2(0, 0, 100, 100)
 
 [resource]
-default_font = ExtResource("22_c4270")
+default_font = ExtResource("22_8cu2s")
 default_font_size = 13
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_color_disabled = Color(1, 1, 1, 0.486275)
