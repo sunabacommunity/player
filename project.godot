@@ -25,6 +25,7 @@ config/windows_native_icon="res://Engine/sunaba.ico"
 
 ResourcePathDB="*res://Engine/ResourcePathDB.gd"
 PlayerUtils="*res://Player/PlayerUtils.cs"
+PlatformService="*res://Engine/PlatformService.cs"
 
 [display]
 
