@@ -139,8 +139,29 @@ class PlayerView extends Widget {
         dialog.dialogText = aboutString;
     }
 
-    function showAboutDialog() {
-        abouDialog.popupCentered();
+    public function showAboutDialog() {
+        var aboutString = "Sunaba Player\n";
+        aboutString += "Version 0.7.0\n";
+        aboutString += "(C) 2022-2025 mintkat\n";
+        aboutString += "\n";
+
+        var osname = OSService.getName();
+        aboutString += "OS: " + osname + "\n";
+        var deviceTypeStr = "Unknown";
+        if (PlatformService.deviceType == PlatformDeviceType.desktop) {
+            deviceTypeStr = "Desktop";
+        }
+        else if (PlatformService.deviceType == PlatformDeviceType.mobile) {
+            deviceTypeStr = "Mobile";
+        }
+        else if (PlatformService.deviceType == PlatformDeviceType.web) {
+            deviceTypeStr = "Web";
+        }
+        else if (PlatformService.deviceType == PlatformDeviceType.xr) {
+            deviceTypeStr = "XR";
+        }
+        aboutString += "Device Type: " + deviceTypeStr + "\n";
+        Debug.info(aboutString, "About Sunaba Studio");
     }
 
     public override function onInput(event: InputEvent) {
