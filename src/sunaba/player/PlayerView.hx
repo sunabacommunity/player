@@ -111,6 +111,19 @@ class PlayerView extends Widget {
                 openSnb(firstSnbPath);
             }
         }));
+
+        var snbPath: String = "";
+        var args = OSService.getCmdlineArgs().toArray();
+        for (arg in args) {
+            if (StringTools.endsWith(arg, ".snb")) {
+                snbPath = arg;
+                break;
+            }
+        }
+
+        if (snbPath != "") {
+            openSnb(snbPath);
+        }
     }
 
     function buildAboutDialog(dialog: AcceptDialog) {
