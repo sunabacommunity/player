@@ -119,16 +119,14 @@ public partial class HxFIleSystem: RefCounted
 		var directories = Directory.GetDirectories(path);
 		foreach (var directory in directories)
 		{
-			dirArray.Add(directory);
-			var subDirArray = ReadDirectory(directory).ToList();
-			dirArray.AddRange(subDirArray);
+			dirArray.Add(directory.GetFile());
 		}
 
 		var files = Directory.GetFiles(path);
 
 		foreach (var file in files)
 		{
-			dirArray.Add(file);
+			dirArray.Add(file.GetFile());
 		}
 
 		return dirArray.ToArray();
