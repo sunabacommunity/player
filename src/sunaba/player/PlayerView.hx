@@ -63,7 +63,7 @@ class PlayerView extends Widget {
                 fileDialog.popupCentered();
             }
             else if (id == 1) {
-                //
+                App.exit(0);
             }
         })));
 
@@ -180,7 +180,7 @@ class PlayerView extends Widget {
     public override function onInput(event: InputEvent) {
         if (OSService.getName() != "macOS") {
             if (InputService.isKeyLabelPressed(Key.ctrl) && InputService.isKeyLabelPressed(Key.f1)) {
-                //
+                App.exit(0);
             }
             if (InputService.isKeyLabelPressed(Key.f2)) {
                 toggleMenuBar();
