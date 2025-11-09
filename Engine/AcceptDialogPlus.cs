@@ -74,6 +74,19 @@ public partial class AcceptDialogPlus : AcceptDialog
         iconRect = _hBoxContainer.GetNode<TextureRect>("IconHolder/Icon");
     }
 
+    public override void _Ready()
+    {
+        var displayScale = DisplayServer.ScreenGetScale(CurrentScreen);
+        if (OS.GetName() != "macOS")
+        {
+            var dpi = DisplayServer.ScreenGetDpi(CurrentScreen);
+            displayScale = dpi * 0.01f;
+        }
+        ContentScaleFactor = displayScale;
+        Size = new Vector2I((int)(Size.X * displayScale), (int)(Size.Y * displayScale));
+        MinSize = new Vector2I((int)(MinSize.X * displayScale), (int)(MinSize.Y * displayScale));
+    }
+
     public void SetIconType(int i)
     {
         Type = i;
