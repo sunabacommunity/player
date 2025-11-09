@@ -194,7 +194,7 @@ class PlayerView extends Widget {
                 toggleFullscreen();
             }
             if (InputService.isKeyLabelPressed(Key.meta) && InputService.isKeyLabelPressed(Key.q)) {
-                //
+                App.exit(0);
             }
         }
     }
