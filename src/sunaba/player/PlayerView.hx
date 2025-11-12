@@ -228,4 +228,10 @@ class PlayerView extends Widget {
             Debug.error(e.message, "Error loading game");
         }
     }
+
+    public override function onNotification(what: Int) {
+        if (what == 2011) {
+            showAboutDialog();
+        }
+    }
 }
