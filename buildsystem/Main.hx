@@ -1,6 +1,9 @@
 import sys.FileSystem;
 import sys.io.File;
 import js.node.Os;
+import haxe.io.BytesInput;
+import haxe.zip.Reader;
+import haxe.io.Bytes;
 
 class Main {
 
@@ -32,6 +35,19 @@ class Main {
             return;
         }
 
+        if (args[0] == "libupdate") {
+            var filepath = FileSystem.absolutePath(args[1]);
+            if (!StringTools.endsWith(filepath, ".zip")) {
+                Sys.println("Invalid File");
+                Sys.exit(-1);
+            }
+            var filebytes = File.getBytes(filepath);
+            extractArchiveV2(filebytes);
+            return;
+        }
+
+        var skipbuild: Bool = false;
+
         for (i in 0...args.length) {
             var arg = args[i];
             if (StringTools.startsWith(arg, "--godot-command=")) {
@@ -50,24 +66,29 @@ class Main {
             else if (StringTools.startsWith(arg, "-t=")) {
                 targetPlatform = StringTools.replace(arg, "-t=", "");
             }
+            else if (arg == "--skip") {
+                skipbuild = true;
+            }
         }
 
         var currentDir = Sys.getCwd();
         if (StringTools.contains(currentDir, "\\"))
             currentDir = StringTools.replace(currentDir, "\\", "/");
 
-        var gamepak = new Gamepak();
-        gamepak.zipOutputPath = currentDir + "player.snb";
-        gamepak.build(currentDir + "Player.sproj");
+        if (!skipbuild) {
+            var gamepak = new Gamepak();
+            gamepak.zipOutputPath = currentDir + "player.snb";
+            gamepak.build(currentDir + "Player.sproj");
 
-        var dotnetRestore = Sys.command("dotnet restore Sunaba.Player.sln");
-        if (dotnetRestore != 0) {
-            Sys.exit(dotnetRestore);
-        }
+            var dotnetRestore = Sys.command("dotnet restore Sunaba.Player.sln");
+            if (dotnetRestore != 0) {
+                Sys.exit(dotnetRestore);
+            }
 
-        var dotnetBuild = Sys.command("dotnet build Sunaba.Player.sln");
-        if (dotnetBuild != 0) {
-            Sys.exit(dotnetBuild);
+            var dotnetBuild = Sys.command("dotnet build Sunaba.Player.sln");
+            if (dotnetBuild != 0) {
+                Sys.exit(dotnetBuild);
+            }
         }
 
         if (args[0] == "run") {
@@ -154,6 +175,46 @@ class Main {
             FileSystem.createDirectory(targetPath);
         }
     }
+
+    public static function extractArchiveV2(bytes:Bytes) {
+        if (bytes.length == 0) {
+            trace("Download failed: empty archive");
+            return;
+        }
+        var cwd = Sys.getCwd();
+        var input = new BytesInput(bytes);
+        var entries = Reader.readZip(input);
+        if (!FileSystem.exists(cwd + "/lib/")) {
+            FileSystem.createDirectory(cwd + "/lib/");
+        }
+        for (entry in entries) {
+            var entryPath = cwd + "/lib/" + entry.fileName;
+            if (StringTools.contains(entryPath, "\\")) {
+                entryPath = StringTools.replace(entryPath, "\\", "/");
+            }
+            if (StringTools.endsWith(entryPath, "/") || StringTools.endsWith(entryPath, "\\") || !StringTools.contains(entryPath, ".")) {
+                Sys.println("Creating Directory: " + entryPath);
+                FileSystem.createDirectory(entryPath);
+                continue;
+            }
+            var stringArray = entryPath.split("/");
+            var baseDir:String = "";
+            for (i in 0...stringArray.length - 1) {
+                baseDir += stringArray[i] + "/";
+                checkDir(baseDir);
+            }
+            Sys.println("Updating File: " + entryPath);
+            var entryBytes = entry.data;
+            File.saveBytes(entryPath, entryBytes);
+        }
+    }
+
+    public static function checkDir(path:String) {
+		if (!FileSystem.exists(path)) {
+			Sys.println("Creating Directory: " + path);
+			FileSystem.createDirectory(path);
+		}
+	}
 
     public static function publish() {
         setupBin();
