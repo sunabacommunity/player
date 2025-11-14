@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Mono.Posix.NETStandard" Version="5.20.1-preview" />
+    <PackageReference Include="MoonSharp" Version="2.0.0" />
       <Content Include="player.snb">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
