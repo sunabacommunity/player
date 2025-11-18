@@ -255,7 +255,7 @@ class Main {
             }
         }
 
-        var nsisScript = "player.x86_64.nsi.";
+        var nsisScript = "player.x86_64.nsi";
         if (exportType == ExportType.debug) {
             nsisScript = "player.x86_64.debug.nsi";
         }
