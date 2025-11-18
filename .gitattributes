@@ -6,4 +6,4 @@
 
 Engine/** linguist-vendored
 bit32.lua linguist-vendored
-*.nsis  linguist-vendored
+*.nsi  linguist-vendored
