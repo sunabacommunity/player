@@ -6,7 +6,6 @@ compatibility_minimum = "4.5"
 [libraries]
 ; Relative paths ensure that our GDExtension can be placed anywhere in the project directory.
 macos.single.debug = "./macos/libsunaba.macos.template_debug.dylib"
-macos.arm64.single.debug = "./macos/libsunaba.macos.template_debug.arm64.dylib"
 macos.double.debug = "./macos/libsunaba.macos.template_debug.double.dylib"
 macos.single.release = "./macos/libsunaba.macos.template_release.dylib"
 macos.double.release = "./macos/libsunaba.macos.template_debug.double.dylib"
