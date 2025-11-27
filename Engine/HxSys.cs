@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using Godot;
 using Godot.Collections;
 using Env = System.Environment;
 using System.Diagnostics;
+using System.IO;
 
 namespace Sunaba.Engine;
 
@@ -28,6 +30,12 @@ public partial class HxSys: RefCounted
 		startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 		startInfo.FileName = "cmd.exe";
 		startInfo.Arguments = $"/C {cmdName} {argsStr}";
+		if (OS.GetName() != "Windows")
+		{
+			
+			startInfo.FileName = "/bin/bash";
+			startInfo.Arguments = $"-c {cmdName} {argsStr}"; 
+		}
 		process.StartInfo = startInfo;
 		process.Start();
 		process.WaitForExit();
