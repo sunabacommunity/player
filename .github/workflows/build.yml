@@ -54,7 +54,6 @@ jobs:
         with:
           submodules: true
           lfs: true
-          token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Setup Godot
         uses: chickensoft-games/setup-godot@v2
