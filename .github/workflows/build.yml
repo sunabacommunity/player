@@ -54,6 +54,7 @@ jobs:
         with:
           submodules: true
           lfs: true
+          ssh-key: ${{ secrets.SSH_KEY }}
 
       - name: Setup Godot
         uses: chickensoft-games/setup-godot@v2
