@@ -52,7 +52,7 @@ jobs:
       - name: Start SSH Agent
         uses: webfactory/ssh-agent@v0.7.0
         with:
-        ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Checkout
         uses: actions/checkout@v4
