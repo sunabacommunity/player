@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://clwg3fow1q1k"]
+
+[ext_resource type="Texture2D" uid="uid://c7b21dpkj16jr" path="res://Engine/Theme/focus_button13_green.png" id="1_fhkk8"]
+
+[resource]
+texture = ExtResource("1_fhkk8")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 0, 49, 45)

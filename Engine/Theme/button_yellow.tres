@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dhbjhlo3axof5"]
+
+[ext_resource type="Texture2D" uid="uid://gqqp1j1sp3qk" path="res://Engine/Theme/yellow_button12.png" id="1_g43au"]
+
+[resource]
+texture = ExtResource("1_g43au")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 0, 49, 45)

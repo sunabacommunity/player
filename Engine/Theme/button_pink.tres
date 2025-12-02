@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://g8cxlmx8xejb"]
+
+[ext_resource type="Texture2D" uid="uid://d0ayf736euk2j" path="res://Engine/Theme/pink_button13.png" id="1_yo56o"]
+
+[resource]
+texture = ExtResource("1_yo56o")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 0, 49, 45)

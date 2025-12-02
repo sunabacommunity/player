@@ -22,6 +22,8 @@ func _process(delta: float) -> void:
 	if instance != null:
 		if instance.has_function("onProcess"):
 			instance.call_function("onProcess", [instance, delta])
+		if instance.has_function("themeUpdate"):
+			instance.call_function("themeUpdate", [instance])
 
 func _physics_process(delta: float) -> void:
 	if instance != null:
