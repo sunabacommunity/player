@@ -52,23 +52,11 @@ public partial class ConfirmationDialogPlus : ConfirmationDialog
     
     public ConfirmationDialogPlus()
     {
-        PackedScene boxScene = GD.Load<PackedScene>("res://Engine/ErrorBox.tscn");
-        if (_type == (int)TypeEnum.Warning)
-        {
-            boxScene = GD.Load<PackedScene>("res://Engine/WarnBox.tscn");
-        }
-        else if (_type == (int)TypeEnum.Info)
-        {
-            boxScene = GD.Load<PackedScene>("res://Engine/InfoBox.tscn");
-        }
-        else
-        {
-            return;
-        }
+        PackedScene boxScene = GD.Load<PackedScene>("res://Engine/InfoBox.tscn");
 
         _hBoxContainer = (HBoxContainer)boxScene.Instantiate<HBoxContainer>();
         AddChild(_hBoxContainer);
-        Label = (Label)_hBoxContainer.GetNode("Label");
+        Label = (Label)_hBoxContainer.GetNode("VBoxContainer/Label");
         iconRect = _hBoxContainer.GetNode<TextureRect>("IconHolder/Icon");
     }
     
