@@ -54,23 +54,11 @@ public partial class AcceptDialogPlus : AcceptDialog
 	
 	public AcceptDialogPlus()
 	{
-		PackedScene boxScene = GD.Load<PackedScene>("res://Engine/ErrorBox.tscn");
-		if (_type == (int)TypeEnum.Warning)
-		{
-			boxScene = GD.Load<PackedScene>("res://Engine/WarnBox.tscn");
-		}
-		else if (_type == (int)TypeEnum.Info)
-		{
-			boxScene = GD.Load<PackedScene>("res://Engine/InfoBox.tscn");
-		}
-		else
-		{
-			return;
-		}
+		PackedScene boxScene = boxScene = GD.Load<PackedScene>("res://Engine/InfoBox.tscn");
 
 		_hBoxContainer = (HBoxContainer)boxScene.Instantiate<HBoxContainer>();
 		AddChild(_hBoxContainer);
-		Label = (Label)_hBoxContainer.GetNode("Label");
+		Label = (Label)_hBoxContainer.GetNode("VBoxContainer/Label");
 		iconRect = _hBoxContainer.GetNode<TextureRect>("IconHolder/Icon");
 	}
 
