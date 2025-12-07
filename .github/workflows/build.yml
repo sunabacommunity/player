@@ -116,8 +116,8 @@ jobs:
           # Default: ${{ github.repository }}
           repository: sunabagg/libsunaba
           latest: true
-          preRelease: true
-          tag: "nightly"
+          #preRelease: true
+          tag: "0.7.1"
           fileName: "godot-cpp-template.zip"
           out-file-path: "dl"
           extract: false
