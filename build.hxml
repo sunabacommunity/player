@@ -1,0 +1,8 @@
+--class-path "src"
+-main Main
+--library libsunaba
+--xml types.xml
+-D source-map
+-lua "main.lua"
+-D lua-vanilla
+-D absolute-path
