@@ -5,6 +5,7 @@ using Godot.Collections;
 using Env = System.Environment;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace Sunaba.Engine;
 
@@ -24,21 +25,58 @@ public partial class HxSys: RefCounted
 
 	public int Command(string cmdName, string[] args)
 	{
-		string argsStr = args.Join(" ");
-		var process = new Process();
-		ProcessStartInfo startInfo = new ProcessStartInfo();
-		startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-		startInfo.FileName = "cmd.exe";
-		startInfo.Arguments = $"/C {cmdName} {argsStr}";
-		if (OS.GetName() != "Windows")
-		{
-			
-			startInfo.FileName = "/bin/bash";
-			startInfo.Arguments = $"-c {cmdName} {argsStr}"; 
-		}
-		process.StartInfo = startInfo;
-		process.Start();
-		process.WaitForExit();
-		return process.ExitCode;
+    	var process = new Process();
+    	var startInfo = new ProcessStartInfo
+    	{
+        	WindowStyle = ProcessWindowStyle.Hidden,
+        	RedirectStandardOutput = false,
+        	RedirectStandardError = false,
+        	UseShellExecute = false
+    	};
+
+    	if (OS.GetName() == "Windows")
+    	{
+        	startInfo.FileName = "cmd.exe";
+        	startInfo.Arguments = $"/C {cmdName} {string.Join(" ", args)}";
+    	}
+    	else
+    	{
+		    if (!cmdName.IsAbsolutePath() && !cmdName.IsRelativePath() && cmdName.Contains(' '))
+		    {
+			    var cmdarr = cmdName.Split(' ');
+			    startInfo.FileName = cmdarr[0];
+			    for (int i = 1; i < cmdarr.Length; i++)
+			    {
+				    var arg = cmdarr[i];
+				    startInfo.ArgumentList.Add(arg);
+			    }
+		    }
+		    else
+		    {
+			    startInfo.FileName = cmdName;
+        	
+			    if (args != null)
+			    {
+				    // Pass arguments directly without shell interpretation
+				    foreach (var arg in args)
+				    {
+					    startInfo.ArgumentList.Add(arg);
+				    }
+			    }
+		    }
+    	}
+	
+    	process.StartInfo = startInfo;
+    	process.Start();
+    	process.WaitForExit();
+    	return process.ExitCode;
 	}
 }
+
+
+
+
+
+
+
+
