@@ -155,7 +155,7 @@ class PlayerView extends Widget {
             }
         };
 
-        var menuBar: Control = getNodeT(Control, "vbox/menuBarControl/hbox/menuBar");
+        var menuBar: Control = getNodeT(Control, "vbox/menuBarControl/hbox/menuBarContainer/menuBar");
         var iconContainer = getNodeT(Control, "vbox/menuBarControl/hbox/iconContainer");
         var iconRect = getNodeT(Control, "vbox/menuBarControl/hbox/iconContainer/icon");
         menuBar.guiInput.connect(eventFunc);
@@ -163,7 +163,7 @@ class PlayerView extends Widget {
         iconContainer.guiInput.connect(eventFunc);
         iconRect.guiInput.connect(eventFunc);
 
-        var fileMenu: PopupMenu = getNodeT(PopupMenu, "vbox/menuBarControl/hbox/menuBar/File");
+        var fileMenu: PopupMenu = getNodeT(PopupMenu, "vbox/menuBarControl/hbox/menuBarContainer/menuBar/File");
         fileMenu.idPressed.connect(Callable.fromFunction((function(id: Int) {
             if (id == 0) {
                 var fileDialog = new FileDialog();
@@ -187,7 +187,7 @@ class PlayerView extends Widget {
             }
         })));
 
-        var viewMenu: PopupMenu = getNodeT(PopupMenu, "vbox/menuBarControl/hbox/menuBar/View");
+        var viewMenu: PopupMenu = getNodeT(PopupMenu, "vbox/menuBarControl/hbox/menuBarContainer/menuBar/View");
         if (OSService.getName() == "macOS") {
             viewMenu.removeItem(1);
             viewMenu.setItemText(0, "Toggle Fullscreen (Cmd+F)");
@@ -201,7 +201,7 @@ class PlayerView extends Widget {
             }
         }));
 
-        var helpMenu: PopupMenu = getNodeT(PopupMenu, "vbox/menuBarControl/hbox/menuBar/Help");
+        var helpMenu: PopupMenu = getNodeT(PopupMenu, "vbox/menuBarControl/hbox/menuBarContainer/menuBar/Help");
         if ((PlatformService.deviceType == PlatformDeviceType.desktop) && (OSService.getName() != "Windows")) {
             helpMenu.systemMenuId = 4;
         }
