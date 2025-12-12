@@ -393,7 +393,12 @@ class PlayerView extends Widget {
     }
 
     public override function onProcess(delta:Float) {
-        if (window.mode == WindowMode.windowed) {
+        if (OSService.getName() == "macOS") {
+            if (OSService.getName() == "macOS") {
+            menuBarControl.visible = window.mode != WindowMode.fullscreen;
+        }
+        }
+        if (window.mode == WindowMode.windowed && OSService.getName() != "macOS") {
             vbox.offsetBottom = -5;
             vbox.offsetLeft = 5;
             vbox.offsetRight = -5;
