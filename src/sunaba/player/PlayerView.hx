@@ -59,7 +59,13 @@ class PlayerView extends Widget {
 
     var isMaximized: Bool;
 
+    private var vbox: VBoxContainer;
+    private var menuBarHbox: HBoxContainer;
+
     public override function onReady() {
+        vbox = getNodeT(VBoxContainer, "vbox");
+        menuBarHbox = getNodeT(HBoxContainer, "vbox/menuBarControl/hbox");
+
         window = getWindow();
         var displayScale = DisplayService.screenGetScale(window.currentScreen);
         if (OSService.getName() == "Windows") {
@@ -387,6 +393,28 @@ class PlayerView extends Widget {
     }
 
     public override function onProcess(delta:Float) {
+        if (window.mode == WindowMode.windowed) {
+            vbox.offsetBottom = -5;
+            vbox.offsetLeft = 5;
+            vbox.offsetRight = -5;
+            vbox.offsetTop = 5;
+            menuBarHbox.offsetLeft = 0;
+            menuBarHbox.offsetRight = 0;
+        }
+        else {
+            vbox.offsetBottom = 0;
+            vbox.offsetLeft = 0;
+            vbox.offsetRight = 0;
+            if (menuBarControl.visible) {
+                vbox.offsetTop = 5;
+                menuBarHbox.offsetLeft = 5;
+                menuBarHbox.offsetRight = -5;
+            }
+            else {
+                vbox.offsetTop = 0;
+            }
+        }
+        
         timeSinceClick -= delta;
         if (timeSinceClick <= 0.0) {
             timeSinceClick = 1.0;
