@@ -13,15 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://d2qlqkqsuico2" path="res://Engine/Theme/windowIcons/close20dark.png" id="11_07i40"]
 [ext_resource type="Texture2D" uid="uid://dafpvty7c2x6q" path="res://Engine/Theme/dark/banner.png" id="12_gxgw6"]
 [ext_resource type="Texture2D" uid="uid://iuq6u6o8uybw" path="res://Engine/Theme/dark/grey_button13.png" id="13_auh5k"]
-[ext_resource type="FontFile" uid="uid://8mh3yfoq37h3" path="res://Engine/Theme/fonts/Oxygen-Bold.ttf" id="14_nu0a4"]
-[ext_resource type="FontFile" uid="uid://wgmjhpg8t35s" path="res://Engine/Theme/fonts/Oxygen-Regular.ttf" id="15_c3sl0"]
+[ext_resource type="FontFile" uid="uid://cwpcp5tic3f10" path="res://Engine/Theme/fonts/NunitoSans-Bold.ttf" id="14_nu0a4"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="15_c3sl0"]
 [ext_resource type="StyleBox" uid="uid://vsre08ftarbp" path="res://Engine/Theme/tab_bg.tres" id="16_ne0k8"]
 [ext_resource type="StyleBox" uid="uid://de1k7xu0s8ba2" path="res://Engine/Theme/tab_fg.tres" id="17_myy62"]
 [ext_resource type="Texture2D" uid="uid://bgffefa6ul6au" path="res://Engine/Theme/dark/grey_tab.png" id="18_fas0c"]
 [ext_resource type="Texture2D" uid="uid://dwpd2a4wc4v1t" path="res://Engine/Theme/collapse.png" id="19_q3chy"]
 [ext_resource type="Texture2D" uid="uid://byb3sj4xvhp6y" path="res://Engine/Theme/expand.png" id="20_w0f5q"]
 [ext_resource type="Texture2D" uid="uid://cqe50bdau567b" path="res://Engine/Theme/dark/window.png" id="21_v4x6h"]
-[ext_resource type="FontFile" uid="uid://8snxwxvq708x" path="res://Engine/Theme/fonts/Inter-Regular.ttf" id="22_uibbo"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="22_uibbo"]
+
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8kjr8"]
 texture = ExtResource("7_lbcxb")

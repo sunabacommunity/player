@@ -17,11 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://dwpd2a4wc4v1t" path="res://Engine/Theme/collapse.png" id="12_rwawf"]
 [ext_resource type="Texture2D" uid="uid://byb3sj4xvhp6y" path="res://Engine/Theme/expand.png" id="13_7wdem"]
 [ext_resource type="Texture2D" uid="uid://cqe50bdau567b" path="res://Engine/Theme/dark/window.png" id="15_h3xky"]
-[ext_resource type="FontFile" uid="uid://8mh3yfoq37h3" path="res://Engine/Theme/fonts/Oxygen-Bold.ttf" id="15_hpgrm"]
+[ext_resource type="FontFile" uid="uid://cwpcp5tic3f10" path="res://Engine/Theme/fonts/NunitoSans-Bold.ttf" id="15_hpgrm"]
 [ext_resource type="Texture2D" uid="uid://d2qlqkqsuico2" path="res://Engine/Theme/windowIcons/close20dark.png" id="16_il6h1"]
 [ext_resource type="Texture2D" uid="uid://dafpvty7c2x6q" path="res://Engine/Theme/dark/banner.png" id="18_c2xtr"]
-[ext_resource type="FontFile" uid="uid://wgmjhpg8t35s" path="res://Engine/Theme/fonts/Oxygen-Regular.ttf" id="21_unv6f"]
-[ext_resource type="FontFile" uid="uid://8snxwxvq708x" path="res://Engine/Theme/fonts/Inter-Regular.ttf" id="22_8cu2s"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="21_unv6f"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="22_8cu2s"]
+
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ghsb1"]
 texture = ExtResource("6_hwutb")

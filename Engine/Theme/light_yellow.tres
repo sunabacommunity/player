@@ -32,15 +32,16 @@
 [ext_resource type="StyleBox" uid="uid://nlmo78inhosd" path="res://Engine/Theme/empty.tres" id="30_4k5ky"]
 [ext_resource type="StyleBox" uid="uid://djrog4w1wovc5" path="res://Engine/Theme/topbar.tres" id="31_ctmn8"]
 [ext_resource type="StyleBox" uid="uid://b56wjbkyw1sow" path="res://Engine/Theme/white.tres" id="32_bmoai"]
-[ext_resource type="FontFile" uid="uid://8mh3yfoq37h3" path="res://Engine/Theme/fonts/Oxygen-Bold.ttf" id="33_4rbm7"]
-[ext_resource type="FontFile" uid="uid://wgmjhpg8t35s" path="res://Engine/Theme/fonts/Oxygen-Regular.ttf" id="34_rekql"]
+[ext_resource type="FontFile" uid="uid://cwpcp5tic3f10" path="res://Engine/Theme/fonts/NunitoSans-Bold.ttf" id="33_4rbm7"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="34_rekql"]
 [ext_resource type="Texture2D" uid="uid://bmytmrkq3kvdw" path="res://Engine/Theme/windowIcons/close20.png" id="35_25m04"]
 [ext_resource type="StyleBox" uid="uid://de1k7xu0s8ba2" path="res://Engine/Theme/tab_fg.tres" id="36_4gwbw"]
 [ext_resource type="StyleBox" uid="uid://vsre08ftarbp" path="res://Engine/Theme/tab_bg.tres" id="37_hebap"]
 [ext_resource type="Texture2D" uid="uid://bq7dmaso520uq" path="res://Engine/Theme/category.png" id="38_o3d8p"]
 [ext_resource type="Texture2D" uid="uid://bt6jroscnl1la" path="res://Engine/Theme/focus_button13_yellow.png" id="39_agrb1"]
 [ext_resource type="Texture2D" uid="uid://bk4ihku1m6le5" path="res://Engine/Theme/window.png" id="39_sngtg"]
-[ext_resource type="FontFile" uid="uid://8snxwxvq708x" path="res://Engine/Theme/fonts/Inter-Regular.ttf" id="40_qlugj"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="40_qlugj"]
+
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ufuef"]
 texture = ExtResource("1_0kq5y")

@@ -13,15 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://d2qlqkqsuico2" path="res://Engine/Theme/windowIcons/close20dark.png" id="11_oeyd2"]
 [ext_resource type="Texture2D" uid="uid://dafpvty7c2x6q" path="res://Engine/Theme/dark/banner.png" id="12_lpsk3"]
 [ext_resource type="Texture2D" uid="uid://iuq6u6o8uybw" path="res://Engine/Theme/dark/grey_button13.png" id="13_coc8s"]
-[ext_resource type="FontFile" uid="uid://8mh3yfoq37h3" path="res://Engine/Theme/fonts/Oxygen-Bold.ttf" id="14_rtruk"]
-[ext_resource type="FontFile" uid="uid://wgmjhpg8t35s" path="res://Engine/Theme/fonts/Oxygen-Regular.ttf" id="15_wfyx3"]
+[ext_resource type="FontFile" uid="uid://cwpcp5tic3f10" path="res://Engine/Theme/fonts/NunitoSans-Bold.ttf" id="14_rtruk"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="15_wfyx3"]
 [ext_resource type="StyleBox" uid="uid://vsre08ftarbp" path="res://Engine/Theme/tab_bg.tres" id="16_5h7ic"]
 [ext_resource type="StyleBox" uid="uid://de1k7xu0s8ba2" path="res://Engine/Theme/tab_fg.tres" id="17_8ptuy"]
 [ext_resource type="Texture2D" uid="uid://bgffefa6ul6au" path="res://Engine/Theme/dark/grey_tab.png" id="18_ejj5k"]
 [ext_resource type="Texture2D" uid="uid://dwpd2a4wc4v1t" path="res://Engine/Theme/collapse.png" id="19_agaqt"]
 [ext_resource type="Texture2D" uid="uid://byb3sj4xvhp6y" path="res://Engine/Theme/expand.png" id="20_fwidj"]
 [ext_resource type="Texture2D" uid="uid://cqe50bdau567b" path="res://Engine/Theme/dark/window.png" id="21_uj72f"]
-[ext_resource type="FontFile" uid="uid://8snxwxvq708x" path="res://Engine/Theme/fonts/Inter-Regular.ttf" id="22_hmijo"]
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="22_hmijo"]
+
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qgkoo"]
 texture = ExtResource("7_xsain")
