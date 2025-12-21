@@ -127,6 +127,8 @@ Section Uninstall
   !insertmacro MUI_STARTMENU_GETFOLDER "Application" $ICONS_GROUP
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\sunaba.windows.template_debug.x86_64.dll"
+  Delete "$INSTDIR\libgodotsteam.windows.template_debug.x86_64.dll"
+  Delete "$INSTDIR\steam_api64.dll"
   RMDir /r "$INSTDIR\data_Sunaba.Player_windows_x86_64"
   Delete "$INSTDIR\Sunaba.Player.exe"
 

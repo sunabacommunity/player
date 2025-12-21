@@ -104,6 +104,8 @@ Section Uninstall
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "$INSTDIR\data_Sunaba.Player_windows_x86_64"
   Delete "$INSTDIR\sunaba.windows.template_release.x86_64.dll"
+  Delete "$INSTDIR\libgodotsteam.windows.template_release.x86_64.dll"
+  Delete "$INSTDIR\steam_api64.dll"
   Delete "$INSTDIR\Sunaba.Player.exe"
 
   Delete "$SMPROGRAMS\Sunaba\Player\Uninstall.lnk"
