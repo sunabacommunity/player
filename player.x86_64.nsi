@@ -60,6 +60,8 @@ Section "MainSection" SEC01
   CreateShortCut "$SMPROGRAMS\Sunaba\Player\Sunaba Player.lnk" "$INSTDIR\Sunaba.Player.exe"
   CreateShortCut "$DESKTOP\Sunaba Player.lnk" "$INSTDIR\Sunaba.Player.exe"
   File "bin\windows-x86_64-release\sunaba.windows.template_release.x86_64.dll"
+  File "bin\windows-x86_64-release\libgodotsteam.windows.template_release.x86_64.dll"
+  File "bin\windows-x86_64-release\steam_api64.dll"
   SetOutPath "$INSTDIR\data_Sunaba.Player_windows_x86_64"
   SetOverwrite try
   File /r "bin\windows-x86_64-release\data_Sunaba.Player_windows_x86_64\*.*"

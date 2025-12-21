@@ -71,6 +71,8 @@ ${If} ${RunningX64}
   File /r "bin\windows-x86_64-debug\data_Sunaba.Player_windows_x86_64\*.*"
   SetOutPath "$INSTDIR"
   File "bin\windows-x86_64-debug\sunaba.windows.template_debug.x86_64.dll"
+  File "bin\windows-x86_64-debug\libgodotsteam.windows.template_debug.x86_64.dll"
+  File "bin\windows-x86_64-debug\steam_api64.dll"
 
   WriteRegStr HKCR "Software\Classes\.snb" "" "Sunaba.Game"
   WriteRegStr HKCR "Software\Classes\Sunaba.Game" "" "Sunaba Game Executable"
