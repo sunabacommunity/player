@@ -152,11 +152,17 @@ class PlayerView extends Widget {
                         window.size = windowSize;
                     }
                     maximizeButton.text = "🗖";
+                    if (OSService.getName() == "Windows") {
+                        maximizeButton.text = "";
+                    }
                 }
                 else if (window.mode == WindowMode.windowed) {
                     windowSize = window.size;
                     window.mode = WindowMode.maximized;
                     maximizeButton.text = "🗗";
+                    if (OSService.getName() == "Windows") {
+                        maximizeButton.text = "";
+                    }
                 }
             }
         };
@@ -228,9 +234,8 @@ class PlayerView extends Widget {
         var buttonFont = new SystemFont();
         if (OSService.getName() == "Windows") {
             buttonFont.fontNames = StringArray.fromArray([
-                "Segoe MDL2 Assets",
-                "Segoe UI Symbol",
-                "Arial Unicode MS"
+                "Segoe Fluent icons",
+                "Segoe MDL2 Assets"
             ]);
         }
         else if (OSService.getName() == "Linux") {
@@ -246,7 +251,13 @@ class PlayerView extends Widget {
         minimizeButton.addThemeStyleboxOverride("normal", styleBoxEmpty);
         minimizeButton.focusMode = FocusModeEnum.none;
         minimizeButton.addThemeFontOverride("font", buttonFont);
+        var newCustomMinimumSize = minimizeButton.customMinimumSize;
         minimizeButton.text = "🗕";
+        if (OSService.getName() == "Windows") {
+            minimizeButton.text = "";
+            newCustomMinimumSize.x = 40;
+            minimizeButton.customMinimumSize = newCustomMinimumSize;
+        }
         minimizeButton.alignment = HorizontalAlignment.center;
         isMaximized = true;
         minimizeButton.pressed.add(() -> {
@@ -270,15 +281,27 @@ class PlayerView extends Widget {
         maximizeButton.addThemeFontOverride("font", buttonFont);
         maximizeButton.text = "🗗";
         maximizeButton.alignment = HorizontalAlignment.center;
+        if (OSService.getName() == "Windows") {
+            maximizeButton.customMinimumSize = newCustomMinimumSize;
+        }
         if (window.mode != WindowMode.windowed) {
             maximizeButton.text = "🗗";
+            if (OSService.getName() == "Windows") {
+                maximizeButton.text = "";
+            }
         }
         else {
             maximizeButton.text = "🗖";
+            if (OSService.getName() == "Windows") {
+                maximizeButton.text = "";
+            }
         }
         maximizeButton.pressed.add(() -> {
             if (window.mode != WindowMode.windowed) {
                 maximizeButton.text = "🗖";
+                if (OSService.getName() == "Windows") {
+                    maximizeButton.text = "";
+                }
                 var maximizedSize = window.size;
                 window.mode = WindowMode.windowed;
                 if (window.size.x == maximizedSize.x && window.size.y == maximizedSize.y) {
@@ -291,6 +314,9 @@ class PlayerView extends Widget {
             }
             else if (window.mode == WindowMode.windowed) {
                 maximizeButton.text = "🗗";
+                if (OSService.getName() == "Windows") {
+                    maximizeButton.text = "";
+                }
                 windowSize = window.size;
                 window.mode = WindowMode.maximized;
             }
@@ -301,6 +327,10 @@ class PlayerView extends Widget {
         closeButton.focusMode = FocusModeEnum.none;
         closeButton.addThemeFontOverride("font", buttonFont);
         closeButton.text = "🗙";
+        if (OSService.getName() == "Windows") {
+            closeButton.text = "";
+            closeButton.customMinimumSize = newCustomMinimumSize;
+        }
         closeButton.alignment = HorizontalAlignment.center;
         closeButton.pressed.add(() -> {
             App.exit(0);
@@ -586,9 +616,15 @@ class PlayerView extends Widget {
         }
         if (window.mode != WindowMode.windowed) {
             maximizeButton.text = "🗗";
+            if (OSService.getName() == "Windows") {
+                maximizeButton.text = "";
+            }
         }
         else {
             maximizeButton.text = "🗖";
+            if (OSService.getName() == "Windows") {
+                maximizeButton.text = "";
+            }
         }
     }
 
