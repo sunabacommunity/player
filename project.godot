@@ -17,7 +17,7 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="Sunaba"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 boot_splash/fullsize=false
-boot_splash/image="uid://b3josp72gt4kt"
+boot_splash/image="uid://dy4taotv4kf4v"
 config/icon="uid://dbqgd8qa3isxs"
 config/macos_native_icon="res://Engine/iconmacos.icns"
 config/windows_native_icon="res://Engine/sunaba.ico"
@@ -30,8 +30,13 @@ PlatformService="*res://Engine/PlatformService.cs"
 
 [display]
 
+window/size/borderless=true
 window/subwindows/embed_subwindows=false
 display_server/driver.linuxbsd="wayland"
+window/size/extend_to_title.macos=true
+window/size/borderless.macos=false
+window/size/viewport_width.windows=491
+window/size/viewport_height.windows=360
 
 [dotnet]
 
