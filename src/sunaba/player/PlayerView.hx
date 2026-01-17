@@ -97,7 +97,7 @@ class PlayerView extends Widget {
         menuBarControl = getNodeT(Control, "vbox/menuBarControl");
         var menuBarSpacer = getNodeT(Control, "vbox/menuBarControl/hbox/spacer");
         var eventFunc = function(eventN: NativeReference) {
-            if (window == null)
+            if (window == null && OSService.getName() != "macOS")
                 return;
 
             if (InputService.isMouseButtonPressed(MouseButton.left) && !titlebarLmbPressed && window.mode == WindowMode.windowed && clickcount == 0) {
