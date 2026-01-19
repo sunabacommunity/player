@@ -13,6 +13,9 @@
       <Content Include="player.snb">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+	  <Content Include="basetxt.slib">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Compile Remove="bin\**\*.cs" />
       <Compile Remove="libsunaba\**\*.cs" />
   </ItemGroup>
