@@ -1,5 +1,6 @@
 package sunaba.player;
 
+import sunaba.core.native.NativeObject;
 import sunaba.core.Reference;
 import sunaba.ui.StyleBoxEmpty;
 import sunaba.core.StringArray;
@@ -31,6 +32,8 @@ import sunaba.ui.Label;
 import sunaba.ui.Button;
 import sunaba.ui.CenterContainer;
 import sunaba.ui.TextureRect;
+import sunaba.core.ArrayList;
+import sunaba.core.native.ScriptType;
 
 class PlayerView extends Widget {
     var subViewport: SubViewport;
@@ -637,7 +640,11 @@ class PlayerView extends Widget {
             appView = new AppView();
             subViewport.addChild(appView);
             appView.init();
+            var playerUtils = new NativeObject("res://Player/PlayerUtils.cs", new ArrayList(), ScriptType.csharp);
+            var baseDir: String = playerUtils.call("GetAssemblyDirectory", new ArrayList());
+            appView.loadLibrary(baseDir + "basetxt.slib");
             appView.loadApp(path);
+            playerUtils.call("queue_free", new ArrayList());
         }
         catch (e: Exception) {
             Debug.error(e.message, "Error loading game");
