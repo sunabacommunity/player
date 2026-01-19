@@ -20,6 +20,8 @@ namespace Sunaba.Engine
             for (int i = 0; i < IoInterfaces.Count; i++)
             {
                 var ioInterface = IoInterfaces[i];
+                if (!path.StartsWith(ioInterface.PathUrl))
+                    continue;
                 var file = ioInterface.GetFilePath(path);
                 if (file != null)
                 {
