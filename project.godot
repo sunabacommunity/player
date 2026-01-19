@@ -46,6 +46,10 @@ window/size/viewport_height.windows=360
 
 project/assembly_name="Sunaba.Player"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
