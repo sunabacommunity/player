@@ -197,13 +197,14 @@ jobs:
         with:
           name: ${{ github.event.repository.name }}
       - name: Create Build Directory
-        run: mkdir ${{ github.workspace }}/build
+        run: |
+          mkdir build
       - name: Unzip Linux Build
         run: |
-          unzip ${{ github.workspace }}/linux-x86_64-release.zip -d ${{ github.workspace }}/linux-x86_64-release 
+          unzip ${{ github.workspace }}/linux-x86_64-release.zip -d ./build/linux-x86_64-release 
       - name: Unzip Windows Build
         run: |
-          unzip ${{ github.workspace }}/windows-x86_64-release.zip -d ${{ github.workspace }}/windows-x86_64-release 
+          unzip ${{ github.workspace }}/windows-x86_64-release.zip -d ./build/windows-x86_64-release 
       - uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
