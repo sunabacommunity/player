@@ -212,6 +212,6 @@ jobs:
           appId: 2657780
           buildDescription: v0.7.7
           rootPath: build
-          depot1Path: windows-x86_64-release 
-          depot2Path: linux-x86_64-release 
+          depot2Path: windows-x86_64-release 
+          depot1Path: linux-x86_64-release 
           releaseBranch: nightly
