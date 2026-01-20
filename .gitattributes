@@ -9,3 +9,4 @@ Engine/** linguist-vendored
 addons/** linguist-vendored
 bit32.lua linguist-vendored
 *.nsi  linguist-vendored
+mobdebug.lua linguist-vendored
