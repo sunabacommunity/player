@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=56 format=3 uid="uid://dokg4162hdjtd"]
+[gd_resource type="Theme" format=3 uid="uid://dokg4162hdjtd"]
 
 [ext_resource type="Texture2D" uid="uid://bqgdxuc66ewbe" path="res://Engine/Theme/dark/grey_button11.png" id="1_dvchm"]
 [ext_resource type="StyleBox" uid="uid://clwg3fow1q1k" path="res://Engine/Theme/button_focus_green.tres" id="2_8kjr8"]
@@ -352,9 +352,9 @@ LineEdit/styles/focus = ExtResource("2_8kjr8")
 LineEdit/styles/normal = SubResource("StyleBoxTexture_m8wnq")
 LineEdit/styles/read_only = SubResource("StyleBoxTexture_m8wnq")
 MenuBar/styles/disabled = ExtResource("8_df44s")
-MenuBar/styles/hover = ExtResource("5_nvsl6")
+MenuBar/styles/hover = SubResource("StyleBoxTexture_oyphn")
 MenuBar/styles/normal = ExtResource("8_df44s")
-MenuBar/styles/pressed = ExtResource("2_8kjr8")
+MenuBar/styles/pressed = ExtResource("5_nvsl6")
 MenuButton/colors/font_color = Color(1, 1, 1, 1)
 MenuButton/colors/font_color_focus = Color(1, 1, 1, 1)
 MenuButton/colors/font_color_hover = Color(1, 1, 1, 1)
