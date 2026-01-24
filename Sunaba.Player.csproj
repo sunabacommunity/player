@@ -10,13 +10,16 @@
   <ItemGroup>
     <PackageReference Include="Mono.Posix.NETStandard" Version="5.20.1-preview" />
     <PackageReference Include="MoonSharp" Version="2.0.0" />
-      <Content Include="player.snb">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
+    <Content Include="player.snb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 	  <Content Include="basetxt.slib">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Compile Remove="bin\**\*.cs" />
-      <Compile Remove="libsunaba\**\*.cs" />
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="basesfx.slib">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Remove="bin\**\*.cs" />
+    <Compile Remove="libsunaba\**\*.cs" />
   </ItemGroup>
 </Project>
