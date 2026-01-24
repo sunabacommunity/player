@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ce8ytj1v7xfe7"]
+
+[ext_resource type="Script" uid="uid://c0e86r062765k" path="res://Engine/WaterShaderCache.gd" id="1_jq3hr"]
+[ext_resource type="Shader" uid="uid://bbo1abph4arco" path="res://Engine/Materials/Water/WaterShader.tres" id="2_40vor"]
+
+[node name="WaterShaderCache" type="Node" unique_id=1145674667]
+script = ExtResource("1_jq3hr")
+shader = ExtResource("2_40vor")
