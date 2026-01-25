@@ -643,6 +643,7 @@ class PlayerView extends Widget {
             var playerUtils = new NativeObject("res://Player/PlayerUtils.cs", new ArrayList(), ScriptType.csharp);
             var baseDir: String = playerUtils.call("GetAssemblyDirectory", new ArrayList());
             appView.loadLibrary(baseDir + "basetxt.slib");
+            appView.loadLibrary(baseDir + "basesfx.slib");
             appView.loadApp(path);
             playerUtils.call("queue_free", new ArrayList());
         }
