@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using Godot.Collections;
 using Godot;
+using System.Linq;
 
 namespace Sunaba.Engine;
 
@@ -105,15 +106,80 @@ public partial class IoInterfaceZip : IoInterface
 
     public override Array<string> GetFileList(string path, string extension = "", bool recursive = true)
     {
+        if (!path.EndsWith("/"))
+            path  += "/";
+        var ogPath = path;
         path = GetFilePath(path);
         Array<string> assets = new Array<string>();
+        if (extension != "" && extension != "/" && !recursive)
+        {
+            var subDirs = GetFileList(path, "/", true);
+
+            foreach (var entry in zipArchive.Entries)
+            {
+                var filePath = PathUrl + entry.FullName;
+                bool isInSubDir = false;
+                foreach (var subDir in subDirs)
+                {
+                    if ((filePath).StartsWith(subDir))
+                    {
+                        isInSubDir = true;
+                        break;
+                    }
+                }
+                if (isInSubDir) continue;
+                assets.Add(filePath);
+            }
+        }
         foreach (var entry in zipArchive.Entries)
         {
-            if (extension != "")
+            if (extension != "" && extension != "/")
             {
                 if (entry.FullName.StartsWith(path) && entry.FullName.EndsWith(extension))
                 {
-                    assets.Add(PathUrl + SanitizePath(entry.FullName));
+                    var filePath = SanitizePath(entry.FullName);
+                    if (filePath.StartsWith("/"))
+                    {
+                        filePath = filePath[1..];
+                    }
+                    assets.Add(PathUrl + filePath);
+                }
+            }
+            else if (extension == "/")
+            {
+                var pathStrArr = (path).Split("/");
+                if (path != "")
+                {
+                    pathStrArr.Append("");
+                }
+                var baseDir = entry.FullName.GetBaseDir();
+                if (path != "") Console.WriteLine(1);
+                Console.WriteLine(baseDir.StartsWith(path));
+                if(baseDir.StartsWith(path)) {
+                    if (path != "") Console.WriteLine(2);
+                    if (baseDir != path)
+                    {
+                        if (path != "") Console.WriteLine(3);
+                        var baseDirArr = baseDir.Split("/").ToList();
+                        if (recursive != true)
+                        {
+                            while (baseDirArr.Count == pathStrArr.Length + 1)
+                            {
+                                baseDirArr.RemoveAt(baseDirArr.Count - 1);
+                            }
+                        }
+                        baseDir = baseDirArr.ToArray().Join("/");
+                        baseDir = PathUrl + baseDir;
+                        if (path != "") Console.WriteLine(4);
+
+                        if (assets.Contains(baseDir)) continue;
+                        if (baseDir == ogPath) continue;
+
+                        if (path != "") Console.WriteLine(5);
+                       
+                        assets.Add(baseDir);
+                        
+                    }
                 }
             }
             else
@@ -125,5 +191,17 @@ public partial class IoInterfaceZip : IoInterface
             }
         }
         return assets;
+    }
+    public override bool DirectoryExists(string path)
+    {
+        path = GetFilePath(path);
+        foreach (var entry in zipArchive.Entries)
+        {
+            if (entry.FullName.StartsWith(path))
+                return true;
+            
+        }
+
+        return false;
     }
 }
