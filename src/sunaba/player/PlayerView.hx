@@ -60,6 +60,24 @@ class PlayerView extends Widget {
     private var resizeThreshold: Float = 10.0;
     private var resizeThresholdBottomRight: Float = 0.25;
 
+    public var customTitlebar(get, set): Bool;
+    function get_customTitlebar() {
+        return window.borderless;
+    }
+    inline function set_customTitlebar(value: Bool): Bool {
+        var minimizeButton = getNodeT(Button, "vbox/menuBarControl/hbox/minimizeButton");
+        minimizeButton.visible = value;
+        var maximizeButton = getNodeT(Button, "vbox/menuBarControl/hbox/maximizeButton");
+        maximizeButton.visible = value;
+        var closeButton = getNodeT(Button, "vbox/menuBarControl/hbox/closeButton");
+        closeButton.visible = value;
+        var iconContainer = getNodeT(Control, "vbox/menuBarControl/hbox/iconContainer");
+        iconContainer.visible = value;
+        windowTitle = getNodeT(Label, "vbox/menuBarControl/windowTitle");
+        windowTitle.visible = value;
+        return window.borderless = value;
+    }
+
     var isMaximized: Bool;
 
     private var vbox: VBoxContainer;
@@ -100,7 +118,7 @@ class PlayerView extends Widget {
         menuBarControl = getNodeT(Control, "vbox/menuBarControl");
         var menuBarSpacer = getNodeT(Control, "vbox/menuBarControl/hbox/spacer");
         var eventFunc = function(eventN: NativeReference) {
-            if (window == null && OSService.getName() != "macOS")
+            if (window == null && customTitlebar == false && OSService.getName() != "macOS")
                 return;
 
             if (InputService.isMouseButtonPressed(MouseButton.left) && !titlebarLmbPressed && window.mode == WindowMode.windowed && clickcount == 0) {
@@ -345,6 +363,16 @@ class PlayerView extends Widget {
             maximizeButton.hide();
             closeButton.hide();
         }
+        else {
+            var osArgs: TypedArray<String> = OSService.getCmdlineArgs();
+            for (i in 0...osArgs.size()) {
+                var arg = osArgs[i];
+                trace(arg);
+                if (arg == "--no-custom-titlebar") {
+                    customTitlebar = false;
+                }
+            }
+        }
 
         window.filesDropped.connect(Callable.fromFunction(function(fileStringArray: TypedArray<String>) {
             var fileStringArr: Array<String> = fileStringArray;
@@ -461,7 +489,7 @@ class PlayerView extends Widget {
             }
         }
 
-        if (OSService.getName() != "macOS") {
+        if (OSService.getName() != "macOS" && customTitlebar == true) {
             window = getWindow();
             if (window != null) {
                 if (window.mode != WindowMode.windowed) return;
@@ -526,7 +554,7 @@ class PlayerView extends Widget {
             }
         }
 
-        if (OSService.getName() != "macOS") {
+        if (OSService.getName() != "macOS" && customTitlebar == true) {
             if (event.native.isClass("InputEventMouseButton")) {
                 var eventMouseButton = Reference.castTo(event, InputEventMouseButton);
                 window = getWindow();
