@@ -55,6 +55,7 @@ class PlayerView extends Widget {
     public var timeSinceClick = 0.1;
     public var windowTitle:Label;
     var maximizeButton: Button;
+    var windowIsMaximized: Bool = false;
 
     private var resizePreview: Bool = true;
     private var resizeThreshold: Float = 10.0;
@@ -162,9 +163,10 @@ class PlayerView extends Widget {
                 trace(clickcount);
                 clickcount = 0;
                 var maximizeButton = getNodeT(Button, "vbox/menuBarControl/hbox/maximizeButton");
-                if (window.mode != WindowMode.windowed) {
+                if (windowIsMaximized == true) {
                     var maximizedSize = window.size;
                     window.mode = WindowMode.windowed;
+                    windowIsMaximized = false;
                     if (window.size.x == maximizedSize.x && window.size.y == maximizedSize.y) {
                         window.size = ogWindowSize;
                         window.moveToCenter();
@@ -177,9 +179,10 @@ class PlayerView extends Widget {
                         maximizeButton.text = "";
                     }
                 }
-                else if (window.mode == WindowMode.windowed) {
+                else if (windowIsMaximized == false) {
                     windowSize = window.size;
                     window.mode = WindowMode.maximized;
+                    windowIsMaximized = true;
                     maximizeButton.text = "🗗";
                     if (OSService.getName() == "Windows") {
                         maximizeButton.text = "";
@@ -282,7 +285,7 @@ class PlayerView extends Widget {
         minimizeButton.alignment = HorizontalAlignment.center;
         isMaximized = true;
         minimizeButton.pressed.add(() -> {
-            if (window.mode != WindowMode.minimized) {
+            if (window.mode != WindowMode.minimized || windowIsMaximized == false) {
                 isMaximized = window.mode == WindowMode.maximized;
                 window.mode = WindowMode.minimized;
             }
@@ -318,13 +321,18 @@ class PlayerView extends Widget {
             }
         }
         maximizeButton.pressed.add(() -> {
-            if (window.mode != WindowMode.windowed) {
+            if (windowIsFullscreen == true) {
+                toggleFullscreen();
+                return;
+            }
+            if (windowIsMaximized == true) {
                 maximizeButton.text = "🗖";
                 if (OSService.getName() == "Windows") {
                     maximizeButton.text = "";
                 }
                 var maximizedSize = window.size;
                 window.mode = WindowMode.windowed;
+                windowIsMaximized = false;
                 if (window.size.x == maximizedSize.x && window.size.y == maximizedSize.y) {
                     window.size = ogWindowSize;
                     window.moveToCenter();
@@ -333,7 +341,8 @@ class PlayerView extends Widget {
                     window.size = windowSize;
                 }
             }
-            else if (window.mode == WindowMode.windowed) {
+            else {
+                windowIsMaximized = true;
                 maximizeButton.text = "🗗";
                 if (OSService.getName() == "Windows") {
                     maximizeButton.text = "";
@@ -459,7 +468,7 @@ class PlayerView extends Widget {
                 menuBarControl.visible = window.mode != WindowMode.fullscreen;
             }
         }
-        if (window.mode == WindowMode.windowed && OSService.getName() != "macOS") {
+        if ((windowIsMaximized == false) && OSService.getName() != "macOS" && customTitlebar == true) {
             vbox.offsetBottom = -5;
             vbox.offsetLeft = 5;
             vbox.offsetRight = -5;
@@ -632,18 +641,25 @@ class PlayerView extends Widget {
         menuBarControl.visible = !menuBarControl.visible;
     }
 
+    public var windowIsFullscreen: Bool = false;
+
     inline function toggleFullscreen() {
         var window = getWindow();
-        if (window.mode != WindowMode.fullscreen) {
+        if (windowIsMaximized != true) {
             window.mode = WindowMode.fullscreen;
+            windowIsFullscreen == true;
+            windowIsMaximized = true;
         }
         else {
             if (isMaximized == true) {
                 window.mode = WindowMode.maximized;
+                windowIsMaximized = true;
             }
             else {
                 window.mode = WindowMode.windowed;
+                windowIsMaximized = false;
             }
+            windowIsFullscreen = false;
         }
         if (window.mode != WindowMode.windowed) {
             maximizeButton.text = "🗗";
