@@ -126,27 +126,6 @@ class PlayerView extends Widget {
                 if (eventN.isClass("InputEventMouseButton")) {
                     var eventMouseButton = new InputEventMouseButton(eventN);
                     clickcount++;
-                    // Top left
-                    if (eventMouseButton.position.x < resizeThreshold && eventMouseButton.position.y < resizeThreshold) {
-                        DisplayService.cursorSetShape(CursorShape.fdiagsize);
-                        window.startResize(WindowResizeEdge.topLeft);
-                        return;
-                    }
-                    // Top Right
-                    if (
-                        eventMouseButton.position.x > window.getVisibleRect().size.x - resizeThreshold &&
-                        eventMouseButton.position.y < resizeThreshold
-                    ) {
-                        DisplayService.cursorSetShape(CursorShape.bdiagsize);
-                        window.startResize(WindowResizeEdge.topRight);
-                        return;
-                    }
-                    // Top
-                    if (eventMouseButton.position.y < resizeThreshold) {
-                        DisplayService.cursorSetShape(CursorShape.vsize);
-                        window.startResize(WindowResizeEdge.top);
-                        return;
-                    }
                     window.startDrag();
                 }        
             }
