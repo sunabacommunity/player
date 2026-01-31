@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=63 format=3 uid="uid://8ifbxyyprfit"]
+[gd_resource type="Theme" format=3 uid="uid://8ifbxyyprfit"]
 
 [ext_resource type="Texture2D" uid="uid://buvjxrl4hhhaw" path="res://Engine/Theme/grey_button11.png" id="1_0kq5y"]
 [ext_resource type="StyleBox" uid="uid://dpmofa7nf6jja" path="res://Engine/Theme/button_focus_yellow.tres" id="2_agrb1"]
@@ -300,13 +300,13 @@ LineEdit/styles/normal = SubResource("StyleBoxTexture_olgw1")
 LineEdit/styles/read_only = SubResource("StyleBoxTexture_olgw1")
 MenuBar/colors/font_color = Color(0, 0, 0, 1)
 MenuBar/colors/font_focus_color = Color(0, 0, 0, 1)
-MenuBar/colors/font_hover_color = Color(1, 1, 1, 1)
+MenuBar/colors/font_hover_color = Color(0, 0, 0, 1)
 MenuBar/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 MenuBar/colors/font_pressed_color = Color(0, 0, 0, 1)
 MenuBar/styles/disabled = ExtResource("30_4k5ky")
-MenuBar/styles/hover = ExtResource("4_fo6qg")
+MenuBar/styles/hover = SubResource("StyleBoxTexture_5g2j1")
 MenuBar/styles/normal = ExtResource("30_4k5ky")
-MenuBar/styles/pressed = ExtResource("2_agrb1")
+MenuBar/styles/pressed = ExtResource("4_fo6qg")
 MenuButton/colors/font_color = Color(0, 0, 0, 1)
 MenuButton/colors/font_color_focus = Color(0, 0, 0, 1)
 MenuButton/colors/font_color_hover = Color(0, 0, 0, 1)

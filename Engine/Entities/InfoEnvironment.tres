@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://c56mhsogb3wjd"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_u58pj"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_pr2yo"]
+
+[resource]
+script = ExtResource("2_pr2yo")
+classname = "info_environmet_standard"
+node_class = "InfoEnvironmet"
+metadata/_custom_type_script = "uid://cxsqwtsqd8w33"

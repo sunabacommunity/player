@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NetRadiantCustomGamePackConfig" format=3 uid="uid://b720qwnpt6575"]
+
+[ext_resource type="Resource" uid="uid://dls5b2kpenpey" path="res://Engine/Entities/FgdNetRadient.tres" id="1_70vtk"]
+[ext_resource type="Resource" uid="uid://f5erfnvbg6b7" path="res://addons/func_godot/game_config/netradiant_custom/netradiant_custom_shader_clip.tres" id="2_imwd7"]
+[ext_resource type="Resource" uid="uid://cfhg30jclb4lw" path="res://addons/func_godot/game_config/netradiant_custom/netradiant_custom_shader_skip.tres" id="3_cljip"]
+[ext_resource type="Resource" uid="uid://bpnj14oaufdpt" path="res://addons/func_godot/game_config/netradiant_custom/netradiant_custom_shader_origin.tres" id="4_m4s1v"]
+[ext_resource type="Script" uid="uid://dfhj3me2g5j0l" path="res://addons/func_godot/src/netradiant_custom/netradiant_custom_gamepack_config.gd" id="5_0byqm"]
+
+[resource]
+script = ExtResource("5_0byqm")
+gamepack_name = "sunaba"
+game_name = "Sunaba"
+fgd_file = ExtResource("1_70vtk")
+model_types = PackedStringArray("glb", "gltf", "obj")
+sound_types = PackedStringArray("wav", "ogg")
+texture_types = PackedStringArray("png", "jpg", "jpeg", "bmp", "tga")
+clip_texture = "textures/special/clip"
+skip_texture = "textures/special/skip"
+metadata/_custom_type_script = "uid://dfhj3me2g5j0l"
