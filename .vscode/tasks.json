@@ -2,13 +2,16 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "group": "build",
             "label": "build-buildsys",
             "command": "haxe",
             "type": "process",
             "args": [
                 "${cwd}/buildsys.hxml"
             ],
-            "problemMatcher": ["$haxe"],
+            "problemMatcher": [
+                "$haxe"
+            ],
             "presentation": {
                 "echo": true,
                 "reveal": "silent",
@@ -19,6 +22,10 @@
             }
         },
         {
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "label": "build",
             "dependsOn": [
                 "build-buildsys"
@@ -28,7 +35,10 @@
             "args": [
                 "${cwd}/build.js"
             ],
-            "problemMatcher": ["$msCompile", "$haxe-absolute"],
+            "problemMatcher": [
+                "$msCompile",
+                "$haxe-absolute"
+            ],
             "presentation": {
                 "echo": true,
                 "reveal": "silent",
