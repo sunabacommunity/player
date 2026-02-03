@@ -2,11 +2,13 @@ using System;
 using System.IO;
 using System.Text;
 using DiscUtils.Iso9660;
+using Godot;
 using Godot.Collections;
 using Array = Godot.Collections.Array;
 
 namespace Sunaba.Engine;
 
+[GlobalClass]
 public partial class ReadOnlyIo : IoInterface
 {
     private CDReader _reader;
