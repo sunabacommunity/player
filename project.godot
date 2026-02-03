@@ -8,6 +8,10 @@
 
 config_version=5
 
+[addons]
+
+imgui/config="uid://dso7ig5mp13gv"
+
 [animation]
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
@@ -31,6 +35,7 @@ config/windows_native_icon="res://Engine/sunaba.ico"
 ResourcePathDB="*res://Engine/ResourcePathDB.gd"
 PlayerUtils="*res://Player/PlayerUtils.cs"
 PlatformService="*res://Engine/PlatformService.cs"
+ImGuiRoot="*uid://dugmpnsxaagba"
 
 [display]
 
@@ -48,7 +53,7 @@ project/assembly_name="Sunaba.Player"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/imgui-godot/plugin.cfg")
 
 [physics]
 
