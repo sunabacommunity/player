@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ImGuiConfig" format=3 uid="uid://dso7ig5mp13gv"]
+
+[ext_resource type="FontFile" uid="uid://d2fx2sayq5pyt" path="res://Engine/Theme/fonts/NunitoSans-Regular.ttf" id="1_p0i5d"]
+[ext_resource type="Script" uid="uid://bwqsw5dwusfib" path="res://addons/imgui-godot/scripts/ImGuiConfig.gd" id="1_xcct5"]
+[ext_resource type="Script" uid="uid://dqp2j66rccu31" path="res://addons/imgui-godot/scripts/ImGuiFont.gd" id="2_k3hvk"]
+
+[sub_resource type="Resource" id="Resource_jncg0"]
+script = ExtResource("2_k3hvk")
+FontData = ExtResource("1_p0i5d")
+metadata/_custom_type_script = "uid://dqp2j66rccu31"
+
+[resource]
+script = ExtResource("1_xcct5")
+Fonts = [SubResource("Resource_jncg0")]
+metadata/_custom_type_script = "uid://bwqsw5dwusfib"
