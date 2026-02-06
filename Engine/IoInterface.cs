@@ -29,12 +29,16 @@ namespace Sunaba.Engine
 
         public virtual String LoadText(string assetPath)
         {
-            return null;
+            var bytes = LoadBytes(assetPath);
+            var base64 = Marshalls.RawToBase64(bytes);
+            return Marshalls.Base64ToUtf8(base64);
         }
 
         public virtual void SaveText(string assetPath, string text)
         {
-
+            var base64 = Marshalls.Utf8ToBase64(text);
+            var bytes = Marshalls.Base64ToRaw(base64);
+            SaveBytes(assetPath, bytes);
         }
 
         public virtual byte[] LoadBytes(string assetPath)
