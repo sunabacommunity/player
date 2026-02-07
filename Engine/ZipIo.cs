@@ -59,15 +59,29 @@ public partial class ZipIo : IoInterface
 
     public override string LoadText(string assetPath)
     {
+        if (!assetPath.Contains(PathUrl))
+        {
+            return null;
+        }
         var path = GetFilePath(assetPath);
-        if (!_zip.GetFiles().Contains(path)) return null;
+        if (!_zip.GetFiles().Contains(path))
+        {
+            return null;
+        }
         return base.LoadText(assetPath);
     }
 
     public override byte[] LoadBytes(string assetPath)
     {
+        if (!assetPath.Contains(PathUrl))
+        {
+            return null;
+        }
         var path = GetFilePath(assetPath);
-        if (!_zip.GetFiles().Contains(path)) return null;
+        if (!_zip.GetFiles().Contains(path))
+        {
+            return null;
+        }
         return _zip.ReadFile(path);
     }
 
@@ -92,12 +106,14 @@ public partial class ZipIo : IoInterface
         var fileList = new Array<string>();
         var files = _zip.GetFiles();
         var path2 = GetFilePath(path);
+        if (!path2.EndsWith("/"))
+            path2 += "/";
         if (extension != "" && extension != "/")
         {
             foreach (var file in files)
             {
                 var filePath = PathUrl + file;
-                if (file.StartsWith(path2) && file.EndsWith(extension) && !file.Substring(path2.Length).Contains("/"))
+                if (file.StartsWith(path2) && file.EndsWith(extension) && !file.Replace(path2, "").Contains("/"))
                 {                    
                     fileList.Add(filePath);
                 }
@@ -124,10 +140,26 @@ public partial class ZipIo : IoInterface
             foreach (var file in files)
             {
                 var filePath = PathUrl + file;
-                if (file.StartsWith(path2) && file.EndsWith("/") && !file.Substring(path2.Length).Contains("/"))
+                if (file.StartsWith(path2) && file.EndsWith("/") && !file.Replace(path2, "").Contains("/"))
                 {
                     fileList.Add(filePath);
                 }
+                else
+                {
+                    var baseDir = file.GetBaseDir();
+                    var dirPath = PathUrl + baseDir + "/";
+                    if (baseDir.StartsWith(path2))
+                    {
+                        if (!baseDir.Replace(path2, "").Contains("/"))
+                        {
+                            if (!fileList.Contains(dirPath))
+                            {
+                                fileList.Add(dirPath);
+                            }
+                        }
+                    }
+                }
+
             }
             if (recursive)
             {
@@ -150,9 +182,12 @@ public partial class ZipIo : IoInterface
             foreach (var file in files)
             {
                 var filePath = PathUrl + file;
-                if (file.StartsWith(path2) && !file.Substring(path2.Length).Contains("/"))
+                if (file.StartsWith(path2))
                 {
-                    fileList.Add(filePath);
+                    if (!file.Replace(path2, "").Contains("/"))
+                    {
+                        fileList.Add(filePath);
+                    }
                 }
             }
             if (recursive)
