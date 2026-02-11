@@ -276,6 +276,37 @@ class Main {
         Sys.println("NSIS installer created at: " + Sys.getCwd() + "/bin");
     }
 
+    public static function buildNsisSystem() {
+        var nsisCommand = "makensis";
+        if (Sys.systemName() == "Windows") {
+            if (Sys.command(nsisCommand + " /VERSION") != 0) {
+                Sys.println("NSIS is not installed or not found in PATH.");
+                Sys.exit(-1);
+            }
+        } else if (Sys.systemName() == "Linux" || Sys.systemName() == "Mac") {
+            nsisCommand = "makensis";
+            if (Sys.command(nsisCommand + " -VERSION") != 0) {
+                Sys.println("NSIS is not installed or not found in PATH.");
+                Sys.exit(-1);
+            }
+        }
+
+        var nsisScript = "player.x86_64.system.nsi";
+        if (exportType == ExportType.debug) {
+            nsisScript = "player.x86_64.system.debug.nsi";
+        }
+
+        var command = nsisCommand + " " + nsisScript;
+        trace("Running NSIS command: " + command);
+        var result = Sys.command(command);
+        if (result != 0) {
+            Sys.println("NSIS installer creation failed with code " + result);
+            Sys.exit(result);
+        }
+
+        Sys.println("NSIS installer created at: " + Sys.getCwd() + "/bin");
+    }
+
     public static function exportZip() {
         var zipPath = Sys.getCwd() + "bin/" + targetPlatform + "-" + exportType + ".zip";
         var binPath = Sys.getCwd() + "bin/" + targetPlatform + "-" + exportType + "/";
