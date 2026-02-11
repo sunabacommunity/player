@@ -274,6 +274,7 @@ class Main {
         }
 
         Sys.println("NSIS installer created at: " + Sys.getCwd() + "/bin");
+        buildNsisSystem();
     }
 
     public static function buildNsisSystem() {
