@@ -22,8 +22,15 @@ func load_library(path: String) -> void:
 	
 	if (!FileAccess.file_exists(path)): return
 	
-	var zipIo = ZipIo.new()
-	zipIo.Open(path, "temp://")
+	var zipIo: IoInterface
+	if (path.ends_with("res://") or path.ends_with("user://")):
+		var _zipIo = ZipIo.new()
+		_zipIo.Open(path, "temp://")
+		zipIo = _zipIo
+	else:
+		var ioInterfaceZip = IoInterfaceZip.new()
+		ioInterfaceZip.LoadFromPath(path, "temp://")
+		zipIo = ioInterfaceZip
 	io_manager.Register(zipIo)
 	
 	if (!zipIo.FileExists("temp://header.json")):
@@ -43,8 +50,15 @@ func load_app(path: String) -> void:
 	
 	if (!FileAccess.file_exists(path)): return
 	
-	var zipIo = ZipIo.new()
-	zipIo.Open(path, "temp://")
+	var zipIo: IoInterface
+	if (path.ends_with("res://") or path.ends_with("user://")):
+		var _zipIo = ZipIo.new()
+		_zipIo.Open(path, "temp://")
+		zipIo = _zipIo
+	else:
+		var ioInterfaceZip = IoInterfaceZip.new()
+		ioInterfaceZip.LoadFromPath(path, "temp://")
+		zipIo = ioInterfaceZip
 	io_manager.Register(zipIo)
 	
 	if (!io_manager.FileExists("temp://header.json")):

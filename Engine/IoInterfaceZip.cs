@@ -104,93 +104,124 @@ public partial class IoInterfaceZip : IoInterface
         }
     }
 
+    private Array<String> _getFiles()
+    {
+	    var entries = zipArchive.Entries;
+	    Array<String> assets = [];
+	    foreach (var zipArchiveEntry in entries)
+	    {
+		    assets.Add(zipArchiveEntry.FullName);
+	    }
+
+	    return assets;
+    }
+
     public override Array<string> GetFileList(string path, string extension = "", bool recursive = true)
     {
-        if (!path.EndsWith("/"))
-            path  += "/";
-        var ogPath = path;
-        path = GetFilePath(path);
-        Array<string> assets = new Array<string>();
-        if (extension != "" && extension != "/" && !recursive)
+        var fileList = new Array<string>();
+        var files = _getFiles();
+        var path2 = GetFilePath(path);
+        if (!path2.EndsWith("/"))
+            path2 += "/";
+        if (extension != "" && extension != "/")
         {
-            var subDirs = GetFileList(path, "/", true);
-
-            foreach (var entry in zipArchive.Entries)
+            foreach (var file in files)
             {
-                var filePath = PathUrl + entry.FullName;
-                bool isInSubDir = false;
+                var filePath = PathUrl + file;
+                if (file.StartsWith(path2) && file.EndsWith(extension) && !file.Replace(path2, "").Contains("/"))
+                {
+                    fileList.Add(filePath);
+                }
+            }
+
+            if (recursive)
+            {
+                var subDirs = GetFileList(path, "/", false);
                 foreach (var subDir in subDirs)
                 {
-                    if ((filePath).StartsWith(subDir))
+                    var subDirFiles = GetFileList(subDir, extension);
+                    foreach (var subDirFile in subDirFiles)
                     {
-                        isInSubDir = true;
-                        break;
+                        if (!fileList.Contains(subDirFile))
+                        {
+                            fileList.Add(subDirFile);
+                        }
                     }
                 }
-                if (isInSubDir) continue;
-                assets.Add(filePath);
             }
         }
-        foreach (var entry in zipArchive.Entries)
+        else if (extension == "/")
         {
-            if (extension != "" && extension != "/")
+            foreach (var file in files)
             {
-                if (entry.FullName.StartsWith(path) && entry.FullName.EndsWith(extension))
+                var filePath = PathUrl + file;
+                if (file.StartsWith(path2) && file.EndsWith("/") && !file.Replace(path2, "").Contains("/"))
                 {
-                    var filePath = SanitizePath(entry.FullName);
-                    if (filePath.StartsWith("/"))
-                    {
-                        filePath = filePath[1..];
-                    }
-                    assets.Add(PathUrl + filePath);
+                    fileList.Add(filePath);
                 }
-            }
-            else if (extension == "/")
-            {
-                var pathStrArr = (path).Split("/");
-                if (path != "")
+                else
                 {
-                    pathStrArr.Append("");
-                }
-                var baseDir = entry.FullName.GetBaseDir();
-                if (path != "") Console.WriteLine(1);
-                Console.WriteLine(baseDir.StartsWith(path));
-                if(baseDir.StartsWith(path)) {
-                    if (path != "") Console.WriteLine(2);
-                    if (baseDir != path)
+                    var baseDir = file.GetBaseDir();
+                    var dirPath = PathUrl + baseDir + "/";
+                    if (baseDir.StartsWith(path2))
                     {
-                        if (path != "") Console.WriteLine(3);
-                        var baseDirArr = baseDir.Split("/").ToList();
-                        if (recursive != true)
+                        if (!baseDir.Replace(path2, "").Contains("/"))
                         {
-                            while (baseDirArr.Count == pathStrArr.Length + 1)
+                            if (!fileList.Contains(dirPath))
                             {
-                                baseDirArr.RemoveAt(baseDirArr.Count - 1);
+                                fileList.Add(dirPath);
                             }
                         }
-                        baseDir = baseDirArr.ToArray().Join("/");
-                        baseDir = PathUrl + baseDir;
-                        if (path != "") Console.WriteLine(4);
+                    }
+                }
 
-                        if (assets.Contains(baseDir)) continue;
-                        if (baseDir == ogPath) continue;
-
-                        if (path != "") Console.WriteLine(5);
-                       
-                        assets.Add(baseDir);
-                        
+            }
+            if (recursive)
+            {
+                var subDirs = GetFileList(path, "/", false);
+                foreach (var subDir in subDirs)
+                {
+                    var subDirFiles = GetFileList(subDir, "/");
+                    foreach (var subDirFile in subDirFiles)
+                    {
+                        if (!fileList.Contains(subDirFile))
+                        {
+                            fileList.Add(subDirFile);
+                        }
                     }
                 }
             }
-            else
+        }
+        else
+        {
+            foreach (var file in files)
             {
-                if (entry.FullName.StartsWith(path))
+                var filePath = PathUrl + file;
+                if (file.StartsWith(path2))
                 {
-                    assets.Add(PathUrl + SanitizePath(entry.FullName));
+                    if (!file.Replace(path2, "").Contains("/"))
+                    {
+                        fileList.Add(filePath);
+                    }
+                }
+            }
+            if (recursive)
+            {
+                var subDirs = GetFileList(path, "/", false);
+                foreach (var subDir in subDirs)
+                {
+                    var subDirFiles = GetFileList(subDir);
+                    foreach (var subDirFile in subDirFiles)
+                    {
+                        if (!fileList.Contains(subDirFile))
+                        {
+                            fileList.Add(subDirFile);
+                        }
+                    }
                 }
             }
         }
-        return assets;
+        return fileList;
     }
     public override bool DirectoryExists(string path)
     {
@@ -199,7 +230,7 @@ public partial class IoInterfaceZip : IoInterface
         {
             if (entry.FullName.StartsWith(path))
                 return true;
-            
+
         }
 
         return false;
