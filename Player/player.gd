@@ -1,4 +1,4 @@
-extends App
+extends DesktopApp
 
 
 func _init() -> void:
