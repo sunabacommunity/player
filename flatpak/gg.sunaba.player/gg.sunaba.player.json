@@ -1,0 +1,35 @@
+{
+  "id": "gg.sunaba.player",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "25.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "sunaba-player",
+  "finish-args": [
+    "--share=ipc",
+    "--share=network",
+    "--socket=x11",
+    "--socket=wayland",
+    "--socket=pulseaudio",
+    "--device=all",
+    "--filesystem=host",
+    "--filesystem=xdg-run/speech-dispatcher",
+    "--talk-name=org.freedesktop.Flatpak",
+    "--talk-name=org.a11y.Bus"
+  ],
+  "modules": [
+    {
+      "name": "sunaba-player",
+      "buildsystem": "simple",
+      "build-commands": [
+        "mkdir -p ${FLATPAK_DEST}/bin",
+        "cp -r * ${FLATPAK_DEST}/bin"
+      ],
+      "sources": [
+        {
+          "type": "dir",
+          "path": "app/"
+        }
+      ]
+    }
+  ]
+}

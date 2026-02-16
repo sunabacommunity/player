@@ -107,3 +107,6 @@ http-client.private.env.json
 types.xml
 
 /.debian
+/flatpak/gg.sunaba.player/app
+/.flatpak-builder
+/repo

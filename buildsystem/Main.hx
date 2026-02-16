@@ -17,6 +17,10 @@ class Main {
 
     static var targetName:String = "";
 
+    static var installFlatpak = false;
+
+    static var flatpakSingleFileBundle = false;
+
     public static function main() {
         var args = Sys.args();
 
@@ -73,6 +77,12 @@ class Main {
                 packageFormat = StringTools.replace(arg, "--pkgformat=", "");
                 trace(packageFormat);
             }
+            else if (packageFormat == PackageFormat.flatpak && arg == "--install") {
+                installFlatpak = true;
+            } 
+            else if (packageFormat == PackageFormat.flatpak && arg == "--single-file-bundle") {
+                flatpakSingleFileBundle = true;
+            }
         }
 
         var currentDir = Sys.getCwd();
@@ -112,6 +122,9 @@ class Main {
         }
         else if (packageFormat == PackageFormat.deb) {
             exportDeb();
+        }
+        else if (packageFormat == PackageFormat.flatpak) {
+            exportFlatpak();
         }
     }
 
@@ -367,6 +380,48 @@ class Main {
             Sys.exit(-1);
         } else {
             Sys.println("DMG package created successfully at: " + dmgPath);
+        }
+    }
+
+    public static function exportFlatpak() {
+        if (Sys.systemName() != "Linux") {
+            Sys.println("Cannot build a flatpak on a non-Linux environment");
+        }
+
+        var cwd = Sys.getCwd();
+        if (!StringTools.endsWith(cwd, "/")) {
+            cwd += "/";
+        }
+
+        var flatpakBasePath = cwd + "flatpak/gg.sunaba.player/";
+
+        var flatpakAppPath = flatpakBasePath + "app/";
+        var binPath = Sys.getCwd() + "bin/" + targetPlatform + "-" + exportType + "/";
+        if (!FileSystem.exists(binPath)) {
+            Sys.println("Export directory does not exist: " + binPath);
+            Sys.exit(-1);
+        }
+
+        dclone(binPath, flatpakAppPath);
+
+        var additionalOptions = "";
+        if (installFlatpak == true) {
+            additionalOptions = "--user --install-deps-from=flathub --repo=" + cwd + "repo --install";
+        }
+
+        var flatpakBuilder = Sys.command("flatpak-builder --force-clean " + additionalOptions +  " bin/flatpakBuild " + flatpakBasePath + "/gg.sunaba.player.json");
+
+        if (flatpakBuilder != 0) {
+            Sys.exit(flatpakBuilder);
+        }
+        File.saveContent(cwd + "bin/flatpakBuild/.gdignore", "");
+        if (FileSystem.exists(cwd + "repo/"))
+            File.saveContent(cwd + "repo/.gdignore", "");
+        if (FileSystem.exists(cwd + ".flatpak-builder/"))
+            File.saveContent(cwd + ".flatpak-builder/.gdignore", "");
+
+        if (flatpakSingleFileBundle == true) {
+            Sys.command("flatpak build-bundle " + cwd + "repo " + cwd + "bin/sunaba-player-" + targetPlatform + "-" + exportType + ".flatpak gg.sunaba.player");
         }
     }
 
