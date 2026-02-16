@@ -23,7 +23,7 @@ func load_library(path: String) -> void:
 	if (!FileAccess.file_exists(path)): return
 	
 	var zipIo: IoInterface
-	if (path.ends_with("res://") or path.ends_with("user://")):
+	if (path.begins_with("res://") or path.begins_with("user://")):
 		var _zipIo = ZipIo.new()
 		_zipIo.Open(path, "temp://")
 		zipIo = _zipIo
@@ -51,7 +51,7 @@ func load_app(path: String) -> void:
 	if (!FileAccess.file_exists(path)): return
 	
 	var zipIo: IoInterface
-	if (path.ends_with("res://") or path.ends_with("user://")):
+	if (path.begins_with("res://") or path.begins_with("user://")):
 		var _zipIo = ZipIo.new()
 		_zipIo.Open(path, "temp://")
 		zipIo = _zipIo
