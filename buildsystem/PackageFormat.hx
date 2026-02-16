@@ -6,4 +6,5 @@ enum abstract PackageFormat(String) from String to String {
     var deb = "deb";
     var dmg = "dmg";
     var zip = "zip";
+    var flatpak = "flatpak";
 }

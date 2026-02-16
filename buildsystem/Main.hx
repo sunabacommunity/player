@@ -110,6 +110,9 @@ class Main {
         } else if (packageFormat == PackageFormat.zip) {
             exportZip();
         }
+        else if (packageFormat == PackageFormat.deb) {
+            exportDeb();
+        }
     }
 
     public static function run() {
@@ -364,6 +367,163 @@ class Main {
             Sys.exit(-1);
         } else {
             Sys.println("DMG package created successfully at: " + dmgPath);
+        }
+    }
+
+    public static function exportDeb() {
+        if (Sys.systemName() != "Linux") {
+            Sys.println("Cannot build a deb package on a non-Linux environment");
+            Sys.exit(-1);
+        }
+
+        var cwd = Sys.getCwd();
+
+        if (!StringTools.endsWith(cwd, "/")) {
+            cwd += "/";
+        }
+
+        var debRootPath = cwd + ".debian/";
+        if (!FileSystem.exists(debRootPath)) {
+            FileSystem.createDirectory(debRootPath);
+        }
+
+        var debPackagePath = debRootPath + "sunaba-player-" + exportType + "/";
+        if (!FileSystem.exists(debPackagePath)) {
+            FileSystem.createDirectory(debPackagePath);
+        }
+        else {
+            FileSystem.deleteDirectory(debPackagePath);
+            FileSystem.createDirectory(debPackagePath);
+        }
+
+        var optPath = debPackagePath + "opt/";
+        if (!FileSystem.exists(optPath)) {
+            FileSystem.createDirectory(optPath);
+        }
+        
+        var sunabaRootPath = optPath + "sunaba/";
+        if (!FileSystem.exists(sunabaRootPath)) {
+            FileSystem.createDirectory(sunabaRootPath);
+        }
+
+        var playerBinPath = sunabaRootPath + "player/";
+        if (!FileSystem.exists(playerBinPath)) {
+            FileSystem.createDirectory(playerBinPath);
+        }
+
+        var binPath = Sys.getCwd() + "bin/" + targetPlatform + "-" + exportType + "/";
+        if (!FileSystem.exists(binPath)) {
+            Sys.println("Export directory does not exist: " + binPath);
+            Sys.exit(-1);
+        }
+
+        dclone(binPath, playerBinPath);
+
+        var usrPath = debPackagePath + "usr/";
+        if (!FileSystem.exists(usrPath)) {
+            FileSystem.createDirectory(usrPath);
+        }
+
+        var sharePath = usrPath + "share/";
+        if (!FileSystem.exists(sharePath)) {
+            FileSystem.createDirectory(sharePath);
+        }
+
+        var desktopPath = sharePath + "applications/";
+        if (!FileSystem.exists(desktopPath)) {
+            FileSystem.createDirectory(desktopPath);
+        }
+
+        var ogDesktopEntryPath = cwd + "debian_files/gg.sunaba.player.desktop";
+        if (!FileSystem.exists(ogDesktopEntryPath)) {
+            Sys.print("Original desktop entry somehow doesn't exist.");
+            Sys.exit(-1);
+        }
+
+        var desktopEntryPath = desktopPath + "gg.sunaba.player.desktop";
+        Sys.println(ogDesktopEntryPath + " -> " + desktopEntryPath);
+        File.copy(ogDesktopEntryPath, desktopEntryPath);
+
+        var pixmapsPath = sharePath + "pixmaps/";
+        if (!FileSystem.exists(pixmapsPath)) {
+            FileSystem.createDirectory(pixmapsPath);
+        }
+
+        var ogDesktopIconPath = cwd + "debian_files/gg.sunaba.player.png";
+        if (!FileSystem.exists(ogDesktopIconPath)) {
+            Sys.print("Original desktop icon somehow doesn't exist.");
+            Sys.exit(-1);
+        }
+
+        var desktopIconPath = pixmapsPath + "gg.sunaba.player.png";
+        Sys.println(ogDesktopIconPath + " -> " + desktopIconPath);
+        File.copy(ogDesktopIconPath, desktopIconPath);
+
+        var debMetadataPath = debPackagePath + "DEBIAN/";
+        if (!FileSystem.exists(debMetadataPath)) {
+            FileSystem.createDirectory(debMetadataPath);
+        }
+
+        var ogControlPath = cwd + "debian_files/control";
+        if (!FileSystem.exists(ogControlPath)) {
+            Sys.print("Original control file somehow doesn't exist.");
+            Sys.exit(-1);
+        }
+
+        var controlPath = debMetadataPath + "control";
+        Sys.println(ogControlPath + " -> " + controlPath);
+        File.copy(ogControlPath, controlPath);
+
+        /*var licensePath = cwd + "LICENSE";
+        if (!FileSystem.exists(ogControlPath)) {
+            Sys.print("License file somehow doesn't exist.");
+            Sys.exit(-1);
+        }
+
+        var debCopyrightPath = debMetadataPath + "copyright";
+        Sys.println(licensePath + " -> " + debCopyrightPath);
+        File.copy(licensePath, debCopyrightPath);*/
+
+        var result = Sys.command("dpkg-deb --build " + debPackagePath);
+        
+        if (result != 0) {
+			Sys.println("dpkg-deb failed at " + result);
+		}
+
+		var debOutputPath = cwd + "bin/";
+		if (!FileSystem.exists(debOutputPath)) {
+			FileSystem.createDirectory(debOutputPath);
+		}
+
+		var debPackageName = "sunaba-player-" + exportType + ".deb";
+
+        var ogDebPath = debRootPath + debPackageName;
+        var debPath =  debOutputPath + debPackageName;
+        Sys.println(ogDebPath + " -> " + debPath);
+		File.copy(ogDebPath, debPath);
+    }
+
+    public static function dclone(source: String, dest: String) {
+        if (!StringTools.endsWith(source, "/")) {
+            source += "/";
+        }
+        if (!StringTools.endsWith(dest, "/")) {
+            dest += "/";
+        }
+        if (!FileSystem.exists(dest)) {
+            FileSystem.createDirectory(dest);
+        }
+        Sys.println(source + " -> " + dest);
+        for (file in FileSystem.readDirectory(source)) {
+            var filePath = source + file;
+            var destFilePath = dest + file;
+            if (FileSystem.isDirectory(filePath)) {
+                dclone(filePath, destFilePath);
+            }
+            else {
+                Sys.println(filePath + " -> " + destFilePath);
+                File.copy(filePath, destFilePath);
+            }
         }
     }
 }

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Sunaba Player
+GenericName=Game Player
+Icon=gg.sunaba.player
+Comment=Player for the Sunaba platform
+Exec=/opt/sunaba/player/sunaba-player
+Terminal=false
+Type=Application
+Categories=Application;Game;X-Fun;Development;
