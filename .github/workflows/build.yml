@@ -34,8 +34,8 @@ jobs:
           - {
               name: "🐧 Linux",
               target: linux-x86_64,
-              os: ubuntu-latest,
-              pkgformat: none,
+              os: ubuntu-latest-m,
+              pkgformat: deb,
             }
           - {
               name: "🪟 Windows",
@@ -137,6 +137,11 @@ jobs:
         run: |
           ${{ github.workspace }}/build.sh publish --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=${{ matrix.config.pkgformat }} --godot-command=godot
 
+      - name: Build Flatpak (Linux)
+        if: matrix.config.target == 'linux-x86_64'
+        run: |
+          ${{ github.workspace }}/build.sh --skip --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=flatpak --install --single-file-bundle
+      
       - name: Build Project (Zip) (Linux Release)
         if: matrix.config.target == 'linux-x86_64' && matrix.build_type == 'release'
         run: |
@@ -170,6 +175,7 @@ jobs:
             ${{ github.workspace }}/bin/*.exe
             ${{ github.workspace }}/bin/*.zip
             ${{ github.workspace }}/bin/*.deb
+            ${{ github.workspace }}/bin/*.flatpak
             ${{ github.workspace }}/bin/*.dmg
 
       #- name: Upload macOS artifact
@@ -180,7 +186,7 @@ jobs:
       #    path: |
       #      ${{ github.workspace }}/bin/*.dmg
   merge:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest-m
     needs: build
     steps:
       - name: Merge Artifacts
@@ -189,7 +195,7 @@ jobs:
           name: ${{ github.event.repository.name }}
           pattern: ${{ github.event.repository.name }}-*
   deployToSteam:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-m
     needs: merge
     steps:
       - uses: actions/download-artifact@v5
