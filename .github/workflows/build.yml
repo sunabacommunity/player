@@ -81,6 +81,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y haxe nsis dpkg-dev flatpak flatpak-builder
 
+      - name: Setup Flathub (Linux)
+        if: matrix.config.target == 'linux-x86_64'
+        run: |
+          flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install flathub org.freedesktop.Platform/x86_64/25.08 -y
+          flatpak install flathub org.freedesktop.Sdk/x86_64/25.08 -y
+
       - name: Setup Haxelib
         run: |
           haxelib setup ${{ github.workspace }}/.hxlib
