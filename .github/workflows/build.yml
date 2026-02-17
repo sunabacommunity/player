@@ -79,7 +79,7 @@ jobs:
         if: matrix.config.os == 'ubuntu-latest' || matrix.config.os == 'ubuntu-latest-m'
         run: |
           sudo apt-get update
-          sudo apt-get install -y haxe nsis dpkg-dev
+          sudo apt-get install -y haxe nsis dpkg-dev flatpak flatpak-builder
 
       - name: Setup Haxelib
         run: |
