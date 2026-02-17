@@ -76,7 +76,7 @@ jobs:
         run: brew install haxe
 
       - name: Install Dependencies (Linux)
-        if: matrix.config.os == 'ubuntu-latest'
+        if: matrix.config.os == 'ubuntu-latest' || matrix.config.os == 'ubuntu-latest-m'
         run: |
           sudo apt-get update
           sudo apt-get install -y haxe nsis dpkg-dev
