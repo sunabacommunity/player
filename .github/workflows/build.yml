@@ -34,8 +34,8 @@ jobs:
           - {
               name: "🐧 Linux",
               target: linux-x86_64,
-              os: ubuntu-latest-m,
-              pkgformat: deb,
+              os: ubuntu-latest,
+              pkgformat: none,
             }
           - {
               name: "🪟 Windows",
@@ -81,12 +81,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y haxe nsis dpkg-dev flatpak flatpak-builder
 
-      - name: Setup Flathub (Linux)
-        if: matrix.config.target == 'linux-x86_64'
-        run: |
-          flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install flathub org.freedesktop.Platform/x86_64/25.08 -y
-          flatpak install flathub org.freedesktop.Sdk/x86_64/25.08 -y
+      #- name: Setup Flathub (Linux)
+      #  if: matrix.config.target == 'linux-x86_64'
+      #  run: |
+      #    flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      #    flatpak install flathub org.freedesktop.Platform/x86_64/25.08 -y
+      #    flatpak install flathub org.freedesktop.Sdk/x86_64/25.08 -y
 
       - name: Setup Haxelib
         run: |
@@ -144,10 +144,10 @@ jobs:
         run: |
           ${{ github.workspace }}/build.sh publish --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=${{ matrix.config.pkgformat }} --godot-command=godot
 
-      - name: Build Flatpak (Linux)
-        if: matrix.config.target == 'linux-x86_64'
-        run: |
-          ${{ github.workspace }}/build.sh --skip --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=flatpak --install --single-file-bundle
+      #- name: Build Flatpak (Linux)
+      #  if: matrix.config.target == 'linux-x86_64'
+      #  run: |
+      #    ${{ github.workspace }}/build.sh --skip --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=flatpak --install --single-file-bundle
       
       - name: Build Project (Zip) (Linux Release)
         if: matrix.config.target == 'linux-x86_64' && matrix.build_type == 'release'
@@ -210,7 +210,7 @@ jobs:
       #    path: |
       #      ${{ github.workspace }}/bin/*.dmg
   merge:
-    runs-on: ubuntu-latest-m
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Merge Artifacts
@@ -219,7 +219,7 @@ jobs:
           name: ${{ github.event.repository.name }}
           pattern: ${{ github.event.repository.name }}-*
   deployToSteam:
-    runs-on: ubuntu-latest-m
+    runs-on: ubuntu-latest
     needs: merge
     steps:
       - uses: actions/download-artifact@v5
