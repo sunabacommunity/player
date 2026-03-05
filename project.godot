@@ -36,6 +36,7 @@ ResourcePathDB="*res://Engine/ResourcePathDB.gd"
 PlayerUtils="*res://Player/PlayerUtils.cs"
 PlatformService="*res://Engine/PlatformService.cs"
 ImGuiRoot="*uid://dugmpnsxaagba"
+SledgeModule="*uid://c2t4207vx3q42"
 
 [display]
 
