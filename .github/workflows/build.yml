@@ -38,12 +38,23 @@ jobs:
               pkgformat: none,
             }
           - {
+              name: "💪🐧 Linux Arm",
+              target: linux-arm64,
+              os: ubuntu-latest,
+              pkgformat: none,
+            }
+          - {
               name: "🪟 Windows",
               target: windows-x86_64,
               os: ubuntu-latest,
               pkgformat: nsis,
             }
-          #- { name: '💪🪟 Windows Arm', target: windows-arm64, os: ubuntu-latest, pkgformat: nsis }
+          - {
+              name: "💪🪟 Windows Arm",
+              target: windows-arm64,
+              os: ubuntu-latest,
+              pkgformat: none,
+            }
 
     name: 🛠 Build / ${{ matrix.config.name }} (${{ matrix.build_type }})
     runs-on: ${{ matrix.config.os }}
