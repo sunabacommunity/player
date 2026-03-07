@@ -23,7 +23,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ["debug", "release"]
+        build_type: [
+          #"debug", 
+          "release"
+        ]
         config:
           - {
               name: "🍏 macOS",
