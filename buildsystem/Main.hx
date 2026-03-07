@@ -183,7 +183,7 @@ class Main {
             targetName = "Sunaba.Player.exe";
         }
         else if (StringTools.startsWith(targetPlatform, "linux")) {
-            if (targetPlatform != "linux-x86_64") {
+            if (targetPlatform != "linux-x86_64" && targetPlatform != "linux-arm64") {
                 Sys.println("Invalid target platform: " + targetPlatform);
                 Sys.exit(-1);
             }
