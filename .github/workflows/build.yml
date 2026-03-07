@@ -239,6 +239,9 @@ jobs:
       - uses: actions/download-artifact@v5
         with:
           name: ${{ github.event.repository.name }}-linux-x86_64-release 
+      - uses: actions/download-artifact@v5
+        with:
+          name: ${{ github.event.repository.name }}-mac-universal-release 
       - name: Create Build Directory
         run: |
           mkdir build
@@ -248,6 +251,9 @@ jobs:
       - name: Unzip Windows Build
         run: |
           unzip ${{ github.workspace }}/windows-x86_64-release.zip -d ./build/windows-x86_64-release 
+      - name: Unzip Mac Build
+        run: |
+          unzip ${{ github.workspace }}/windows-x86_64-release.zip -d ./build/mac-universal-release
       - uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
@@ -257,4 +263,5 @@ jobs:
           rootPath: build
           depot2Path: windows-x86_64-release 
           depot1Path: linux-x86_64-release 
+          depot3Path: mac-universal-release 
           releaseBranch: nightly
