@@ -161,9 +161,9 @@ class Main {
                 if (arch == "x64") {
                     targetPlatform = "linux-x86_64";
                 }
-                /*else if (arch == "arm64") {
+                else if (arch == "arm64") {
                     targetPlatform = "linux-arm64";
-                }*/
+                }
             }
         }
 
