@@ -266,5 +266,5 @@ jobs:
           rootPath: build
           depot2Path: windows-x86_64-release 
           depot1Path: linux-x86_64-release 
-          depot3Path: mac-universal-release 
+          depot4Path: mac-universal-release 
           releaseBranch: nightly
