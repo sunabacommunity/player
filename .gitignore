@@ -110,3 +110,5 @@ types.xml
 /flatpak/gg.sunaba.player/app
 /.flatpak-builder
 /repo
+
+~*
