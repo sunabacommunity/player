@@ -256,7 +256,7 @@ jobs:
           unzip ${{ github.workspace }}/windows-x86_64-release.zip -d ./build/windows-x86_64-release 
       - name: Unzip Mac Build
         run: |
-          unzip ${{ github.workspace }}/mac-x86_64-release.zip -d ./build/mac-universal-release
+          unzip ${{ github.workspace }}/mac-universal-release.zip -d ./build/mac-universal-release
       - uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
