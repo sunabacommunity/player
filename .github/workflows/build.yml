@@ -248,9 +248,6 @@ jobs:
       - name: Create Build Directory
         run: |
           mkdir build
-      - name: LS
-        run: |
-          ls ${{ github.workspace }}/
       - name: Unzip Linux Build
         run: |
           unzip ${{ github.workspace }}/linux-x86_64-release.zip -d ./build/linux-x86_64-release 
