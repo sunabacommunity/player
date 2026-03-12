@@ -15,6 +15,20 @@ namespace Sunaba.Engine
             PathUrl = "ioInterfaceMulti://";
         }
 
+        public string[] GetPathUrls()
+        {
+            List<string> pathUrls = new();
+            foreach (var ioInterface in IoInterfaces)
+            {
+                if (!pathUrls.Contains(ioInterface.PathUrl))
+                {
+                    pathUrls.Add(ioInterface.PathUrl);
+                }
+            }
+
+            return pathUrls.ToArray();
+        }
+
         public override string GetFilePath(string path)
         {
             for (int i = 0; i < IoInterfaces.Count; i++)
@@ -136,6 +150,21 @@ namespace Sunaba.Engine
             }
 
             return 1;
+        }
+
+        public override Array<string> GetFileListAll(string extension, bool recursive = true)
+        {
+            Array<string> fileList = new Array<string>();
+            foreach (var ioInterface in IoInterfaces)
+            {
+                var subFileList = ioInterface.GetFileListAll(extension, recursive);
+                foreach (var file in subFileList)
+                {
+                    fileList.Add(file);
+                }
+            }
+
+            return fileList;
         }
 
         public override Array<string> GetFileList(string path, string extension = "", bool recursive = true)

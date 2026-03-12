@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Godot;
+using Godot.Collections;
 
 namespace Sunaba.Engine
 {
@@ -30,6 +31,15 @@ namespace Sunaba.Engine
                 path = "/" + path;
             }
             return PathUrl.Replace("://", ":") + path;
+        }
+
+        public override Array<string> GetFileList(string path = "", string extension = "", bool recursive = true)
+        {
+            if (path == PathUrl)
+            {
+                return new Array<string>();
+            }
+            return base.GetFileList(path, extension, recursive);
         }
     }
 }

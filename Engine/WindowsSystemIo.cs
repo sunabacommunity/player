@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Godot;
+using Godot.Collections;
 
 namespace Sunaba.Engine
 {
@@ -34,6 +35,15 @@ namespace Sunaba.Engine
             var filePath = filePathArray[1].Replace("\\", "/").Replace("//", "/");
             var newPath = PathUrl + driveLetter.ToLower() + filePath;
             return newPath;
+        }
+
+        public override Array<string> GetFileList(string path = "", string extension = "", bool recursive = true)
+        {
+            if (path == PathUrl)
+            {
+                return new Array<string>();
+            }
+            return base.GetFileList(path, extension, recursive);
         }
     }
 }

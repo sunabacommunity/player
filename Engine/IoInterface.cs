@@ -51,7 +51,7 @@ namespace Sunaba.Engine
 
         }
 
-        public Array<String> GetFileListAll(string extension, bool recursive = true)
+        public virtual Array<String> GetFileListAll(string extension, bool recursive = true)
         {
             return GetFileList(PathUrl, extension, recursive);
         }

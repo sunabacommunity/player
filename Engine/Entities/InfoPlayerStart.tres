@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("2_6o30w")
+target_map_editor = 1
 models_sub_folder = "models"
 scene_file = ExtResource("3_ildcj")
 classname = "info_player_start"

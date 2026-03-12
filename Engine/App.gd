@@ -7,14 +7,6 @@ var dotnet_interop: DotNetInteropService = DotNetInteropService.new()
 func init(sandboxed: bool = false, classnames: PackedStringArray = []) -> void:
 	init_state(sandboxed, classnames)
 	
-	if not sandboxed:
-		if OS.get_name() == "Windows":
-			var windowsSysIO = WindowsSystemIo.new()
-			io_manager.Register(windowsSysIO)
-		elif OS.get_name() != "Web":
-			var unixSysIo = UnixSystemIo.new()
-			io_manager.Register(unixSysIo)
-	
 	add_child(dotnet_interop)
 	SledgeModule.Bind(dotnet_interop)
 	
