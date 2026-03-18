@@ -136,47 +136,51 @@ public partial class ZipIo : IoInterface
             }
         }
         else if (extension == "/")
-        {
-            foreach (var file in files)
-            {
-                var filePath = PathUrl + file;
-                if (file.StartsWith(path2) && file.EndsWith("/") && !file.Replace(path2, "").Contains("/"))
-                {
-                    fileList.Add(filePath);
-                }
-                else
-                {
-                    var baseDir = file.GetBaseDir();
-                    var dirPath = PathUrl + baseDir + "/";
-                    if (baseDir.StartsWith(path2))
-                    {
-                        if (!baseDir.Replace(path2, "").Contains("/"))
-                        {
-                            if (!fileList.Contains(dirPath))
-                            {
-                                fileList.Add(dirPath);
-                            }
-                        }
-                    }
-                }
-
-            }
-            if (recursive)
-            {
-                var subDirs = GetFileList(path, "/", false);
-                foreach (var subDir in subDirs)
-                {
-                    var subDirFiles = GetFileList(subDir, "/");
-                    foreach (var subDirFile in subDirFiles)
-                    {
-                        if (!fileList.Contains(subDirFile))
-                        {
-                            fileList.Add(subDirFile);
-                        }
-                    }
-                }
-            }
-        }
+		{
+			foreach (var file in files)
+			{
+				var filePath = PathUrl + file;
+				var baseDir = file.GetBaseDir();
+				if (String.IsNullOrEmpty(baseDir)) continue;
+				if (baseDir.StartsWith("/")) {
+					baseDir = baseDir.Substring(1);
+				}
+				var dirPath = PathUrl + baseDir + "/";
+				if (dirPath == path) continue;
+				if (dirPath.StartsWith(path) || path == PathUrl)
+				{
+					string remaining = dirPath.Replace(path, "");
+					if (remaining != "")
+					{
+						if (remaining.EndsWith("/")) {
+							remaining = remaining.Substring(0, remaining.Length - 1);
+						}
+						if (!remaining.Contains("/")) 
+						{
+							if (!fileList.Contains(dirPath))
+							{
+								fileList.Add(dirPath);
+							}
+						}		
+					}
+				}
+			}
+			if (recursive)
+			{
+				var subDirs = GetFileList(path, "/", false);
+				foreach (var subDir in subDirs)
+				{
+					var subDirFiles = GetFileList(subDir, "/");
+					foreach (var subDirFile in subDirFiles)
+					{
+						if (!fileList.Contains(subDirFile))
+						{
+							fileList.Add(subDirFile);
+						}
+					}
+				}
+			}
+		}
         else
         {
             foreach (var file in files)
