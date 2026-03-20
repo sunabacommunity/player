@@ -390,7 +390,7 @@ class PlayerView extends Widget {
 
     function buildAboutDialog(dialog: AcceptDialog) {
         var aboutString = "Sunaba Player\n";
-        aboutString += "Version 0.7.13\n";
+        aboutString += "Version 0.7.14\n";
         aboutString += "(C) 2022-2025 mintkat\n";
         aboutString += "\n";
 
