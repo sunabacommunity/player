@@ -20,6 +20,9 @@
     <Content Include="basesfx.slib">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="basechar.slib">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Compile Remove="bin\**\*.cs" />
     <Compile Remove="libsunaba\**\*.cs" />
     <PackageReference Include="Sledge.Formats" Version="1.3.3" />
