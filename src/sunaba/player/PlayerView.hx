@@ -670,6 +670,7 @@ class PlayerView extends Widget {
             var baseDir: String = playerUtils.call("GetAssemblyDirectory", new ArrayList());
             appView.loadLibrary(baseDir + "basetxt.slib");
             appView.loadLibrary(baseDir + "basesfx.slib");
+            appView.loadLibrary(baseDir + "basechar.slib");
             appView.loadApp(path);
             playerUtils.call("queue_free", new ArrayList());
         }
