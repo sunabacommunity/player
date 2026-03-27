@@ -158,10 +158,10 @@ jobs:
         run: |
           ${{ github.workspace }}/build.sh publish --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=${{ matrix.config.pkgformat }} --godot-command=godot
 
-      - name: Build Flatpak (Linux)
-        if: matrix.config.target == 'linux-x86_64'
-        run: |
-          ${{ github.workspace }}/build.sh --skip --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=flatpak --install --single-file-bundle
+      #- name: Build Flatpak (Linux)
+      #  if: matrix.config.target == 'linux-x86_64'
+      #  run: |
+      #    ${{ github.workspace }}/build.sh --skip --${{ matrix.build_type }} --target=${{ matrix.config.target }} --pkgformat=flatpak --install --single-file-bundle
       
       - name: Build Project (Zip) (Linux Release)
         if: matrix.config.target == 'linux-x86_64' && matrix.build_type == 'release'
